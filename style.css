@@ -1,3 +1,7 @@
+/* exporting two fonts for this project */
+
+@import url('https://fonts.googleapis.com/css2?family=Fasthand&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
 /* Color Theme Swatches in RGBA */
 
 :root {
@@ -7,42 +11,70 @@
   --colorIcon: rgba(63, 63, 63, 1);
   --colorDetail: rgba(13, 13, 13, 1);
   --boxShadow: 0 0 10px var rgba(0, 0, 0, 0.5);
+  --fastHandFont: 'Fasthand', cursive;
+  --robotoFont: 'Roboto', sans-serif;
 }
 
-*{
-    margin: 0;
-    padding: 0;
+/* Basic set up */
+* {
+  margin: 0;
+  padding: 0;
 }
 
 html,
-body{
-    height: 100%;
+body {
+  height: 100%;
+  font-size: 16px;
 }
 
-.wrapper{
-    display: grid;
-    grid-template-columns: 360px 3fr;
-    width: 100%;
-    height: 100%;
+.wrapper {
+  display: grid;
+  grid-template-columns: 360px 3fr;
+  width: 100%;
+  height: 100%;
 }
 
-.wrapper .sideContent{
-    background-color: var(--colorBG);
-    box-shadow: var(--boxShadow);
+/* Side bar settings */
+.wrapper .sideContent {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  background-color: var(--colorBG);
+  box-shadow: var(--boxShadow);
+  padding: 10px;
 }
 
-.input-transparent{
-    border: none;
-    background-color: var(--colorBG);
-    border-bottom: solid;
+.sideContent .logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--colorFont);
+  font-family: var(--robotoFont);
+  font-size: 2.5rem;
+  text-transform: uppercase;
 }
 
-.wrapper .main{
-    background-color: var(--colorBody);
+.sideContent .logo img{
+    width: 140px;
 }
 
-footer{
-    height: 40px;
-    background-color: var(--colorDetail);
-    box-shadow: var(--boxShadow);
+input:focus {
+  outline: none;
+}
+
+.input-transparent {
+  border: none;
+  background-color: var(--colorBG);
+  border-bottom: 2px solid black;
+  color: var(--colorFont);
+}
+
+.wrapper .main {
+  background-color: var(--colorBody);
+}
+
+footer {
+  height: 40px;
+  background-color: var(--colorDetail);
+  box-shadow: var(--boxShadow);
 }
