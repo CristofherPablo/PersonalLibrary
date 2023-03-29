@@ -1,0 +1,48 @@
+/* Color Theme Swatches in RGBA */
+
+:root {
+  --colorFont: rgba(244, 244, 244, 1);
+  --colorBody: rgb(167, 167, 167);
+  --colorBG: rgba(114, 114, 114, 1);
+  --colorIcon: rgba(63, 63, 63, 1);
+  --colorDetail: rgba(13, 13, 13, 1);
+  --boxShadow: 0 0 10px var rgba(0, 0, 0, 0.5);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body{
+    height: 100%;
+}
+
+.wrapper{
+    display: grid;
+    grid-template-columns: 360px 3fr;
+    width: 100%;
+    height: 100%;
+}
+
+.wrapper .sideContent{
+    background-color: var(--colorBG);
+    box-shadow: var(--boxShadow);
+}
+
+.input-transparent{
+    border: none;
+    background-color: var(--colorBG);
+    border-bottom: solid;
+}
+
+.wrapper .main{
+    background-color: var(--colorBody);
+}
+
+footer{
+    height: 40px;
+    background-color: var(--colorDetail);
+    box-shadow: var(--boxShadow);
+}
