@@ -10,7 +10,7 @@
   --colorBG: rgba(114, 114, 114, 1);
   --colorIcon: rgba(63, 63, 63, 1);
   --colorDetail: rgba(13, 13, 13, 1);
-  --boxShadow: 0 0 10px var rgba(0, 0, 0, 0.5);
+  --boxShadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
   --fastHandFont: 'Fasthand', cursive;
   --robotoFont: 'Roboto', sans-serif;
 }
@@ -23,8 +23,9 @@
 
 html,
 body {
-  height: 100%;
+  height: calc(100% - 20px);
   font-size: 16px;
+  box-sizing: border-box;
 }
 
 .wrapper {
@@ -38,7 +39,7 @@ body {
 .wrapper .sideContent {
   display: flex;
   flex-direction: column;
-  align-content: center;
+  justify-content: space-around;
   background-color: var(--colorBG);
   box-shadow: var(--boxShadow);
   padding: 10px;
@@ -54,8 +55,74 @@ body {
   text-transform: uppercase;
 }
 
-.sideContent .logo img{
-    width: 140px;
+.sideContent .logo img {
+  width: 140px;
+  transition: 0.05s;
+}
+
+.sideContent .logo img:hover {
+  transform: scale(1.1);
+}
+
+/* SideBar Form setup */
+
+.sideForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  color: var(--colorFont);
+  font-family: var(--robotoFont);
+  text-shadow: var(--boxShadow);
+}
+
+.sideContent form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  padding: 15px;
+  margin-top: 30px;
+  box-sizing: border-box;
+}
+
+/* 
+    Making the span place holder change position  
+transitioning the span place holder to stay inside the form point of view, till the user click it, then it goes up in the y line by 25px 
+
+*/
+
+
+.sideContent form .inputBlock{
+    position: relative;
+}
+
+.sideContent form .inputBlock span.placeHolder{
+    position: absolute;
+    left: 0;
+    transition: all 0.3s;
+    transform-origin: 0% 0%;
+    pointer-events: none;
+}
+
+.inputBlock input:valid + span.placeHolder,
+.inputBlock input:focus + span.placeHolder{
+    transform: scale(0.8) translateY(-25px);
+}
+
+.inputBlock input:focus{
+    border-bottom: 2px dotted var(--colorFont) !important;
+}
+
+.validationSection{
+   
+}
+
+/* set the color of date type input to transparent so it will not show the default input */
+input[type=date]:required:invalid::-webkit-datetime-edit {
+    color: transparent;
 }
 
 input:focus {
@@ -64,9 +131,11 @@ input:focus {
 
 .input-transparent {
   border: none;
+  width: 100%;
   background-color: var(--colorBG);
   border-bottom: 2px solid black;
   color: var(--colorFont);
+  font-size: 1.2rem;
 }
 
 .wrapper .main {

@@ -17,22 +17,66 @@
     <div class="wrapper">
       <section class="sideContent">
         <div class="logo">
-            <a href="#">
-                <img src="assets/logo.png" alt="books in various positions logo in a book shelf, with clouds passing by and a cloud shaped background">
-            </a>
-            <p>PLibrary</p>
+          <a href="#">
+            <img
+              src="assets/logo.png"
+              alt="books in various positions logo in a book shelf, with clouds passing by and a cloud shaped background"
+            />
+          </a>
+          <p>PLibrary</p>
         </div>
         <div class="sideForm">
-            <h1>Add New Book</h1>
-            <form>
-                <input class="input-transparent" type="text" required>
-                <input class="input-transparent" type="text" required>
-                <input class="input-transparent" type="number" min="1" max="9999" required>
-                <input class="input-transparent" type="date" required>
-                <input class="input-transparent" type="date" required>
-                <input class="input-transparent" type="text">
-                <button>Add Book</button>
-            </form>
+          <h1>Add New Book</h1>
+          <form>
+            <div class="inputBlock">
+              <input class="input-transparent" type="text" required />
+              <span class="placeHolder">Title of the book</span>
+              <div class="validationSection">
+                <p>This field is required!!</p>
+              </div>
+            </div>
+
+            <div class="inputBlock">
+              <input class="input-transparent" type="text" required />
+              <span class="placeHolder">Name of the author</span>
+              <div class="validationSection">
+                <p>This field is required!!</p>
+              </div>
+            </div>
+
+            <div class="inputBlock">
+              <input
+                class="input-transparent"
+                type="number"
+                min="1"
+                max="9999"
+                required
+              />
+              <span class="placeHolder">How many pages</span>
+              <div class="validationSection">
+                <p>This field is required!!</p>
+              </div>
+            </div>
+
+            <div class="inputBlock">
+              <input class="input-transparent" type="date" required />
+              <span class="placeHolder">Release date</span>
+              <div class="validationSection">
+                <p>This field is required!!</p>
+              </div>
+            </div>
+
+            <div class="inputBlock">
+              <input class="input-transparent" type="date" placeholder="" required />
+              <span class="placeHolder">Acquired date</span>
+              <div class="validationSection">
+                <p>This field is required!!</p>
+              </div>
+            </div>
+
+            <input class="input-transparent" type="text" />
+            <button>Add Book</button>
+          </form>
         </div>
       </section>
       <section class="main"></section>
