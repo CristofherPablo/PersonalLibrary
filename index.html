@@ -29,7 +29,12 @@
           <h1>Add New Book</h1>
           <form>
             <div class="inputBlock">
-              <input class="input-transparent" type="text" required />
+              <input
+                id="title"
+                class="input-transparent"
+                type="text"
+                required
+              />
               <span class="placeHolder">Title of the book</span>
               <div class="validationSection">
                 <p>This field is required!!</p>
@@ -37,7 +42,12 @@
             </div>
 
             <div class="inputBlock">
-              <input class="input-transparent" type="text" required />
+              <input
+                id="author"
+                class="input-transparent"
+                type="text"
+                required
+              />
               <span class="placeHolder">Name of the author</span>
               <div class="validationSection">
                 <p>This field is required!!</p>
@@ -46,6 +56,7 @@
 
             <div class="inputBlock">
               <input
+                id="pages"
                 class="input-transparent"
                 type="number"
                 min="1"
@@ -59,7 +70,12 @@
             </div>
 
             <div class="inputBlock">
-              <input class="input-transparent" type="date" required />
+              <input
+                id="release"
+                class="input-transparent"
+                type="date"
+                required
+              />
               <span class="placeHolder">Release date</span>
               <div class="validationSection">
                 <p>This field is required!!</p>
@@ -68,9 +84,9 @@
 
             <div class="inputBlock">
               <input
+                id="acquired"
                 class="input-transparent"
                 type="date"
-                placeholder=""
                 required
               />
               <span class="placeHolder">Acquired date</span>
@@ -80,10 +96,10 @@
             </div>
 
             <div class="inputBlock" id="checkbox">
-              <input class="input-transparent" type="checkbox" />
+              <input id="read" class="input-transparent" type="checkbox" />
               <label>Already read this book</label>
             </div>
-            <button>Add Book</button>
+            <button id="addBook">Add Book</button>
           </form>
         </div>
       </section>
@@ -109,9 +125,10 @@
         </div>
         <div class="wrapper-main">
           <div class="bookTable">
+
             <div class="tableHeader">
-              <ul>
-                <li>Title </li>
+              <ul class="grid-style">
+                <li>Title</li>
                 <li>Author</li>
                 <li>Pages</li>
                 <li>Release Date</li>
@@ -119,12 +136,42 @@
                 <li>Read Status</li>
               </ul>
             </div>
+
+            <div class="tableContent">
+              <ul class="grid-style">
+                <li>The Lord of the Ring - Two Towers</li>
+                <li>J.R.R.Tolkin</li>
+                <li>500</li>
+                <li>2/2/2020</li>
+                <li>3/29/2023</li>
+                <li>Unread</li>
+                <li>update</li>
+              </ul>
+            </div>
+            <div class="tableContent">
+              <ul class="grid-style">
+                <li>The Lord of the Ring - Two Towers</li>
+                <li>J.R.R.Tolkin</li>
+                <li>500</li>
+                <li>2/2/2020</li>
+                <li>3/29/2023</li>
+                <li>Unread</li>
+                <li>update</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
       <footer>
         <p>
-          Made by <a href="">Cristofher Guersoni</a> for <a href="">Odin Project</a>
+          Made by
+          <a href="https://github.com/CristofherPablo" target="_blank"
+            >Cristofher Guersoni</a
+          >
+          for
+          <a href="https://www.theodinproject.com/paths" target="_blank"
+            >Odin Project</a
+          >
         </p>
       </footer>
     </div>

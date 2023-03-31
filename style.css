@@ -220,19 +220,34 @@ input:focus {
 .wrapper .main .wrapper-main .bookTable{
   width: 80%;
   margin: 0 auto;
-  padding: 10px;
   background-color: var(--colorIcon);
   color: var(--colorFont);
+  box-shadow: 0 0 1rem rgb(0, 0, 0, 0.5);
 }
 
-.wrapper .main .bookTable .tableHeader ul{
+.wrapper .main .bookTable .grid-style{
   display: grid;
   grid-template-columns: 3fr 3fr 1fr 2fr 2fr 2fr 1fr;
   gap: 10px;
+  list-style-type: none;
+  padding: 10px;
+  border: 1px solid rgba(13, 13, 13, .3);
 }
 
-.wrapper .main .bookTable .tableHeader ul{
-  list-style-type: none;
+.wrapper .main .bookTable .tableContent{
+  background-color: var(--colorBG);
+  text-shadow: 0.05em 0.05em 0.2em rgba(0,0,0,0.6);
+}
+
+.wrapper .main .bookTable .tableContent:nth-child(odd){
+  background-color: var(--colorBody);
+  color: rgb(252, 246, 246);
+}
+
+.wrapper .main .bookTable .tableContent li{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 footer {
