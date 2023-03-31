@@ -210,13 +210,57 @@ input:focus {
   gap: 20px;
 }
 
+/* Main content table */
+
+.wrapper .main .wrapper-main{
+  box-sizing: border-box;
+  margin-top: 30px;
+}
+
+.wrapper .main .wrapper-main .bookTable{
+  width: 80%;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: var(--colorIcon);
+  color: var(--colorFont);
+}
+
+.wrapper .main .bookTable .tableHeader ul{
+  display: grid;
+  grid-template-columns: 3fr 3fr 1fr 2fr 2fr 2fr 1fr;
+  gap: 10px;
+}
+
+.wrapper .main .bookTable .tableHeader ul{
+  list-style-type: none;
+}
+
 footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 40px;
   background-color: var(--colorDetail);
   box-shadow: var(--boxShadow);
   grid-column: span 2;
+  color: var(--colorFont);
 }
 
+footer p{
+  font-size: 18px;
+}
+
+footer a {
+  text-decoration: none;
+  color: var(--colorFont);
+  font-style: italic;
+  font-size: 1rem;
+}
+
+footer a:hover{
+  text-decoration: underline;
+  color: rgb(255, 255, 255, 0.8);
+}
 /*
 
 https://mooniidev.github.io/library/
