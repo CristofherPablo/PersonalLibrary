@@ -1,3 +1,5 @@
+const { forEach } = require("lodash");
+
 let myLibrary = [];
 
 class Book {
@@ -12,7 +14,16 @@ class Book {
   }
 }
 
-
+function alreadyAdd(titleNewBook){
+    let newBook = titleNewBook.replace(/\s+/g, '').toLowerCase();
+    myLibrary.forEach(function(Book){
+        let currentBook = Book.replace(/\s+/g, '').toLowerCase();
+        if(newBook === currentBook){
+            return true;
+        }
+    });
+    return false;
+}
 
 function addBookToLibrary() {
   let title = document.getElementById('title').value.replace(/^\s+|\s+$/gm, '');
