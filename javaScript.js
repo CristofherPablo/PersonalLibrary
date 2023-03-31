@@ -20,7 +20,9 @@ function validationForm() {
   let pages = parseInt(document.getElementById('pages').value);
   let release = document.getElementById('release').value;
   let acquired = document.getElementById('acquired').value;
-  let valid = 0;
+  let isValid = 0;
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
   //let readStatus = document.getElementById('read').checked;
 
   if (title === '') {
@@ -29,7 +31,7 @@ function validationForm() {
   } else {
     let p = document.querySelector('.validationSection.title');
     p.style.display = 'none';
-    valid += 1;
+    isValid += 1;
   }
 
   if (author === '') {
@@ -38,7 +40,7 @@ function validationForm() {
   } else {
     let p = document.querySelector('.validationSection.author');
     p.style.display = 'none';
-    valid += 1;
+    isValid += 1;
   }
 
   if (isNaN(pages)) {
@@ -59,32 +61,62 @@ function validationForm() {
 
     let p2 = document.querySelector('.validationSection.pages.err');
     p2.style.display = 'none';
-    valid += 1;
+    isValid += 1;
   }
 
   if (release === '') {
     let p = document.querySelector('.validationSection.release');
+    let pErr = document.querySelector('.validationSection.release.err');
+    pErr.style.display = 'none';
     p.style.display = 'block';
   } else {
+    let checkDate = release.split('-');
     let p = document.querySelector('.validationSection.release');
-    p.style.display = 'none';
-    valid += 1;
+    let pErr = document.querySelector('.validationSection.release.err');
+
+    if (checkDate[0].length > 4) {
+      p.style.display = 'none';
+      pErr.style.display = 'block';
+    } else if (checkDate[0] > currentYear) {
+      p.style.display = 'none';
+      pErr.style.display = 'block';
+    } else {
+      p.style.display = 'none';
+      pErr.style.display = 'none';
+      isValid += 1;
+    }
   }
 
   if (acquired === '') {
     let p = document.querySelector('.validationSection.acquired');
+    let pErr = document.querySelector('.validationSection.acquired.err');
+    pErr.style.display = 'none';
     p.style.display = 'block';
   } else {
+    let checkDate = acquired.split('-');
     let p = document.querySelector('.validationSection.acquired');
-    p.style.display = 'none';
-    valid += 1;
+    let pErr = document.querySelector('.validationSection.acquired.err');
+
+    if (checkDate[0].length > 4) {
+      p.style.display = 'none';
+      pErr.style.display = 'block';
+    } else if (checkDate[0] > currentYear) {
+      p.style.display = 'none';
+      pErr.style.display = 'block';
+    } else {
+      p.style.display = 'none';
+      pErr.style.display = 'none';
+      isValid += 1;
+    }
   }
 
-  console.log(`${valid}`);
+  return isValid;
 }
 
 let addBookBnt = document.getElementById('addBook');
 addBookBnt.addEventListener('click', (event) => {
   event.preventDefault();
-  validationForm();
+  if(validationForm() === 5){
+    console.log('Is valid');
+  };
 });
