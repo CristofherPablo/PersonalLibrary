@@ -67,7 +67,12 @@
             </div>
 
             <div class="inputBlock">
-              <input class="input-transparent" type="date" placeholder="" required />
+              <input
+                class="input-transparent"
+                type="date"
+                placeholder=""
+                required
+              />
               <span class="placeHolder">Acquired date</span>
               <div class="validationSection">
                 <p>This field is required!!</p>
@@ -87,9 +92,18 @@
         <div class="header-main">
           <nav>
             <ul>
-              <li>Total Books: </li>
-              <li>Read: </li>
-              <li>Unread: </li>
+              <li class="bookScore">
+                <p>Total Books:</p>
+                <span id="totalBooks">0</span>
+              </li>
+              <li class="bookScore">
+                <p>Read:</p>
+                <span id="booksRead">0</span>
+              </li>
+              <li class="bookScore">
+                <p>Unread:</p>
+                <span id="booksUnread">0</span>
+              </li>
             </ul>
           </nav>
         </div>

@@ -188,12 +188,26 @@ input:focus {
 
 .wrapper .main {
   background-color: var(--colorBody);
-  padding: 20px;
   box-sizing: border-box;
 }
 
+/* Header main content */
 .wrapper .main .header-main{
+  background-color: var(--colorIcon);
   padding: 10px;
+  color: var(--colorFont);
+}
+
+.wrapper .main .header-main ul{
+  display: flex;
+  padding: 10px;
+  gap: 50px;
+  list-style-type: none;
+}
+
+.wrapper .main .header-main .bookScore{
+  display: flex;
+  gap: 20px;
 }
 
 footer {
