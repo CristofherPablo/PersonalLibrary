@@ -1,16 +1,37 @@
 let myLibrary = [];
 
-function Book(title, author, pages, release, acquired, index) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.release = release;
-  this.acquired = acquired;
-  this.index = index;
+class Book {
+  constructor(title, author, pages, release, acquired, readStatus, index) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.release = release;
+    this.acquired = acquired;
+    this.readStatus = readStatus;
+    this.index = index;
+  }
 }
 
+
+
 function addBookToLibrary() {
-  // do stuff here
+  let title = document.getElementById('title').value.replace(/^\s+|\s+$/gm, '');
+  let author = document
+    .getElementById('author')
+    .value.replace(/^\s+|\s+$/gm, '');
+  let pages = parseInt(document.getElementById('pages').value);
+  let release = document.getElementById('release').value.split('-');
+  let acquired = document.getElementById('acquired').value.split('-');
+  let readStatus = document.getElementById('read').checked;
+  let index = myLibrary.length;
+
+  let newBook = new Book(title, author, pages, release, acquired, readStatus, index);
+
+  if(myLibrary.length === 0){
+    myLibrary.push(newBook);
+  }else{
+
+  }
 }
 
 //validating the form
@@ -23,7 +44,6 @@ function validationForm() {
   let isValid = 0;
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
-  //let readStatus = document.getElementById('read').checked;
 
   if (title === '') {
     let p = document.querySelector('.validationSection.title');
@@ -114,9 +134,11 @@ function validationForm() {
 }
 
 let addBookBnt = document.getElementById('addBook');
+
 addBookBnt.addEventListener('click', (event) => {
   event.preventDefault();
-  if(validationForm() === 5){
-    console.log('Is valid');
-  };
+
+  if (validationForm() === 5) {
+    addBookToLibrary();
+  }
 });
