@@ -250,15 +250,27 @@ input:focus {
   align-items: center;
 }
 
-.wrapper .main .bookTable .tableContent #deleteBook,
-.wrapper .main .bookTable .tableContent #editBook{
-  width: 20px;
-  transition: 0.4s;
-  padding: 5px;
+.wrapper .main .bookTable .tableContent .crudButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
 }
 
-.wrapper .main .bookTable .tableContent #deleteBook:hover,
-.wrapper .main .bookTable .tableContent #editBook:hover{
+.wrapper .main .bookTable .tableContent .deleteBook,
+.wrapper .main .bookTable .tableContent .editBook{
+  width: 20px;
+  transition: 0.4s;
+  
+}
+
+.wrapper .main .bookTable .tableContent .deleteBook:hover,
+.wrapper .main .bookTable .tableContent .editBook:hover{
   transform: scale(1.1);
   filter: brightness(80%);
 }

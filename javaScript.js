@@ -1,4 +1,68 @@
-let myLibrary = [];
+let myLibrary = [
+  {
+    title: 'The Lord of the Rings - The Fellowship of the Ring',
+    author: 'J.R.R. Tolkien',
+    pages: 423,
+    release: '29/07/1954',
+    acquired: '10/06/2021',
+    readStatus: true,
+    index: 0,
+  },
+  {
+    title: 'The Lord of the Rings - The Two Towers',
+    author: 'J.R.R. Tolkien',
+    pages: 352,
+    release: '11/11/1954',
+    acquired: '12/06/2021',
+    readStatus: false,
+    index: 1,
+  },
+  {
+    title: 'The Lord of the Rings - The Return of the King',
+    author: 'J.R.R. Tolkien',
+    pages: 416,
+    release: '20/10/1955',
+    acquired: '14/06/2021',
+    readStatus: false,
+    index: 2,
+  },
+  {
+    title: "Harry Potter and the Philosopher's Stone",
+    author: 'J.K. Rowling',
+    pages: 223,
+    release: '26/06/1997',
+    acquired: '15/06/2021',
+    readStatus: true,
+    index: 3,
+  },
+  {
+    title: 'The Hobbit',
+    author: 'J.R.R. Tolkien',
+    pages: 300,
+    release: '21/09/1937',
+    acquired: '16/06/2021',
+    readStatus: true,
+    index: 4,
+  },
+  {
+    title: 'To Kill a Mockingbird',
+    author: 'Harper Lee',
+    pages: 281,
+    release: '07/11/1960',
+    acquired: '05/12/2022',
+    readStatus: true,
+    index: 5,
+  },
+  {
+    title: '1984',
+    author: 'George Orwell',
+    pages: 328,
+    release: '06/08/1949',
+    acquired: '09/23/2021',
+    readStatus: true,
+    index: 6,
+  },
+];
 
 class Book {
   constructor(title, author, pages, release, acquired, readStatus, index) {
@@ -10,6 +74,26 @@ class Book {
     this.readStatus = readStatus;
     this.index = index;
   }
+}
+
+function deleteBook(alt) {
+  console.log('hi');
+  if (myLibrary.length === 1) {
+    myLibrary.push();
+    cleanContainer();
+  }
+  const deleteIndex = alt.split(' ');
+  console.log(deleteIndex[3]);
+}
+
+function listeningDeleteBtn() {
+  let deleteBookBnt = document.querySelectorAll('.deleteBook');
+  deleteBookBnt.forEach(function (button) {
+    button.addEventListener('click', (event) => {
+      console.log('listening');
+      deleteBook(event.target.alt);
+    });
+  });
 }
 
 function displayLibrary() {
@@ -49,15 +133,24 @@ function displayLibrary() {
     }
     // creating the imgs for delete and update
     const deleteImg = document.createElement('img');
-    deleteImg.setAttribute('id', 'deleteBook');
+    deleteImg.classList.add('deleteBook');
+    deleteImg.setAttribute('Alt', 'delete image index ' + `${Book.index}`);
     deleteImg.src = 'assets/XDelete.png';
+    const deleteBtn = document.createElement('button');
+    deleteBtn.classList.add('crudButton');
+    deleteBtn.appendChild(deleteImg);
 
     const updateImg = document.createElement('img');
-    updateImg.setAttribute('id', 'editBook');
+    updateImg.classList.add('editBook');
+    updateImg.setAttribute('Alt', 'update image index ' + `${Book.index}`);
     updateImg.src = 'assets/edit.png';
+    const updateBtn = document.createElement('button');
+    updateBtn.classList.add('crudButton');
+    updateBtn.appendChild(updateImg);
+
     const li7 = document.createElement('li');
-    li7.appendChild(deleteImg);
-    li7.appendChild(updateImg);
+    li7.appendChild(deleteBtn);
+    li7.appendChild(updateBtn);
 
     //append all to form the structure
 
@@ -100,7 +193,13 @@ function addBookToLibrary() {
     .value.replace(/^\s+|\s+$/gm, '');
   let pages = parseInt(document.getElementById('pages').value);
   let release = document.getElementById('release').value.split('-');
+  let setDateRight =
+    `${release[2]}` + '/' + `${release[1]}` + '/' + `${release[0]}`;
+  release = setDateRight;
   let acquired = document.getElementById('acquired').value.split('-');
+  setDateRight =
+    `${acquired[2]}` + '/' + `${acquired[1]}` + '/' + `${acquired[0]}`;
+  acquired = setDateRight;
   let readStatus = document.getElementById('read').checked;
   let index = myLibrary.length;
 
@@ -118,6 +217,9 @@ function addBookToLibrary() {
     myLibrary.push(newBook);
     cleanContainer();
     displayLibrary();
+    listeningDeleteBtn();
+
+    console.log(newBook);
   } else {
     if (alreadyAdd(newBook.title)) {
       return;
@@ -125,6 +227,7 @@ function addBookToLibrary() {
       myLibrary.push(newBook);
       cleanContainer();
       displayLibrary();
+      listeningDeleteBtn();
     }
   }
 }
@@ -237,3 +340,9 @@ addBookBnt.addEventListener('click', (event) => {
     addBookToLibrary();
   }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  listeningDeleteBtn();
+});
+
+displayLibrary();
