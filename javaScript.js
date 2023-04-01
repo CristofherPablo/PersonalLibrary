@@ -1,5 +1,3 @@
-const { Container } = require("js-sdsl");
-
 let myLibrary = [];
 
 class Book {
@@ -49,6 +47,17 @@ function displayLibrary() {
     } else {
       li6.textContent = 'Unread';
     }
+    // creating the imgs for delete and update
+    const deleteImg = document.createElement('img');
+    deleteImg.setAttribute('id', 'deleteBook');
+    deleteImg.src = 'assets/XDelete.png';
+
+    const updateImg = document.createElement('img');
+    updateImg.setAttribute('id', 'editBook');
+    updateImg.src = 'assets/edit.png';
+    const li7 = document.createElement('li');
+    li7.appendChild(deleteImg);
+    li7.appendChild(updateImg);
 
     //append all to form the structure
 
@@ -58,6 +67,7 @@ function displayLibrary() {
     ul.appendChild(li4);
     ul.appendChild(li5);
     ul.appendChild(li6);
+    ul.appendChild(li7);
     div.appendChild(ul);
 
     //append it to the table wrapper
@@ -65,9 +75,9 @@ function displayLibrary() {
   });
 }
 
-function cleanContainer(){
-    const container = document.getElementById('tableContainer');
-    container.innerHTML = ''; 
+function cleanContainer() {
+  const container = document.getElementById('tableContainer');
+  container.innerHTML = '';
 }
 
 function alreadyAdd(titleNewBook) {
@@ -106,14 +116,14 @@ function addBookToLibrary() {
 
   if (myLibrary.length === 0) {
     myLibrary.push(newBook);
-    cleanContainer()
+    cleanContainer();
     displayLibrary();
   } else {
     if (alreadyAdd(newBook.title)) {
       return;
     } else {
       myLibrary.push(newBook);
-      cleanContainer()
+      cleanContainer();
       displayLibrary();
     }
   }

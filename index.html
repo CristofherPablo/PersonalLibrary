@@ -27,7 +27,7 @@
         </div>
         <div class="sideForm">
           <h1>Add New Book</h1>
-          <form>
+          <form autocomplete="off">
             <div class="inputBlock">
               <input
                 id="title"
@@ -133,8 +133,7 @@
           </nav>
         </div>
         <div class="wrapper-main">
-          <div class="bookTable" id="tableContainer">
-
+          <div class="bookTable">
             <div class="tableHeader">
               <ul class="grid-style">
                 <li>Title</li>
@@ -146,27 +145,30 @@
               </ul>
             </div>
 
-            <div class="tableContent">
-              <ul class="grid-style">
-                <li>The Lord of the Ring - Two Towers</li>
-                <li>J.R.R.Tolkin</li>
-                <li>500</li>
-                <li>2/2/2020</li>
-                <li>3/29/2023</li>
-                <li>Unread</li>
-                <li>update</li>
-              </ul>
-            </div>
-            <div class="tableContent">
-              <ul class="grid-style">
-                <li>The Lord of the Ring - Two Towers</li>
-                <li>J.R.R.Tolkin</li>
-                <li>500</li>
-                <li>2/2/2020</li>
-                <li>3/29/2023</li>
-                <li>Unread</li>
-                <li>update</li>
-              </ul>
+            <div id="tableContainer">
+              <div class="tableContent">
+                <ul class="grid-style">
+                  <li>The Lord of the Ring - Two Towers</li>
+                  <li>J.R.R.Tolkin</li>
+                  <li>500</li>
+                  <li>2/2/2020</li>
+                  <li>3/29/2023</li>
+                  <li>Unread</li>
+                  <li>update</li>
+                </ul>
+              </div>
+              <div class="tableContent">
+                <ul class="grid-style">
+                  <li>The Lord of the Ring - Two Towers</li>
+                  <li>J.R.R.Tolkin</li>
+                  <li>500</li>
+                  <li>2/2/2020</li>
+                  <li>3/29/2023</li>
+                  <li>Unread</li>
+                  <li><img id="deleteBook" src="assets/XDelete.png" alt="">
+                  <img id="editBook" src="assets/edit.png" alt=""></li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>

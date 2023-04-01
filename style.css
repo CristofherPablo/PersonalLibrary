@@ -250,6 +250,19 @@ input:focus {
   align-items: center;
 }
 
+.wrapper .main .bookTable .tableContent #deleteBook,
+.wrapper .main .bookTable .tableContent #editBook{
+  width: 20px;
+  transition: 0.4s;
+  padding: 5px;
+}
+
+.wrapper .main .bookTable .tableContent #deleteBook:hover,
+.wrapper .main .bookTable .tableContent #editBook:hover{
+  transform: scale(1.1);
+  filter: brightness(80%);
+}
+
 footer {
   display: flex;
   justify-content: center;
