@@ -1,3 +1,5 @@
+const { Container } = require("js-sdsl");
+
 let myLibrary = [];
 
 class Book {
@@ -63,6 +65,11 @@ function displayLibrary() {
   });
 }
 
+function cleanContainer(){
+    const container = document.getElementById('tableContainer');
+    container.innerHTML = ''; 
+}
+
 function alreadyAdd(titleNewBook) {
   let newBook = titleNewBook.replace(/\s+/g, '').toLowerCase();
 
@@ -99,12 +106,14 @@ function addBookToLibrary() {
 
   if (myLibrary.length === 0) {
     myLibrary.push(newBook);
+    cleanContainer()
     displayLibrary();
   } else {
     if (alreadyAdd(newBook.title)) {
       return;
     } else {
       myLibrary.push(newBook);
+      cleanContainer()
       displayLibrary();
     }
   }
