@@ -1,4 +1,4 @@
-const { forEach } = require("lodash");
+const { forEach } = require('lodash');
 
 let myLibrary = [];
 
@@ -14,15 +14,67 @@ class Book {
   }
 }
 
-function alreadyAdd(titleNewBook){
-    let newBook = titleNewBook.replace(/\s+/g, '').toLowerCase();
-    myLibrary.forEach(function(Book){
-        let currentBook = Book.replace(/\s+/g, '').toLowerCase();
-        if(newBook === currentBook){
-            return true;
-        }
-    });
-    return false;
+function displayLibrary() {
+  if (myLibrary.length === 0) {
+    return;
+  }
+
+  const container = document.getElementById('tableContainer');
+
+  myLibrary.forEach(function (Book) {
+    const div = document.createElement('div');
+    div.classList.add('tableHeader');
+
+    const ul = document.createElement('ul');
+    ul.classList.add('grid-style');
+
+    const li1 = document.createElement('li');
+    li1.textContent = `${Book.title}`;
+
+    const li2 = document.createElement('li');
+    li2.textContent = `${Book.author}`;
+
+    const li3 = document.createElement('li');
+    li3.textContent = `${Book.pages}`;
+
+    const li4 = document.createElement('li');
+    li4.textContent = `${Book.release}`;
+
+    const li5 = document.createElement('li');
+    li5.textContent = `${Book.acquired}`;
+
+    const li6 = document.createElement('li');
+    if (Book.readStatus) {
+      li6.textContent = 'Read';
+    } else {
+      li6.textContent = 'Unread';
+    }
+
+    //append all to form the structure
+
+    ul.appendChild(li1);
+    ul.appendChild(li2);
+    ul.appendChild(li3);
+    ul.appendChild(li4);
+    ul.appendChild(li5);
+    ul.appendChild(li6);
+    div.appendChild(ul);
+
+    //append it to the table wrapper
+    container.appendChild(div);
+
+  });
+}
+
+function alreadyAdd(titleNewBook) {
+  let newBook = titleNewBook.replace(/\s+/g, '').toLowerCase();
+  myLibrary.forEach(function (Book) {
+    let currentBook = Book.replace(/\s+/g, '').toLowerCase();
+    if (newBook === currentBook) {
+      return true;
+    }
+  });
+  return false;
 }
 
 function addBookToLibrary() {
@@ -36,12 +88,24 @@ function addBookToLibrary() {
   let readStatus = document.getElementById('read').checked;
   let index = myLibrary.length;
 
-  let newBook = new Book(title, author, pages, release, acquired, readStatus, index);
+  let newBook = new Book(
+    title,
+    author,
+    pages,
+    release,
+    acquired,
+    readStatus,
+    index
+  );
 
-  if(myLibrary.length === 0){
+  if (myLibrary.length === 0) {
     myLibrary.push(newBook);
-  }else{
-
+  } else {
+    if (alreadyAdd(newBook.title)) {
+      return;
+    } else {
+      myLibrary.push(newBook);
+    }
   }
 }
 
