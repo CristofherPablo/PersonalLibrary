@@ -1,5 +1,3 @@
-const { forEach } = require('lodash');
-
 let myLibrary = [];
 
 class Book {
@@ -23,7 +21,7 @@ function displayLibrary() {
 
   myLibrary.forEach(function (Book) {
     const div = document.createElement('div');
-    div.classList.add('tableHeader');
+    div.classList.add('tableContent');
 
     const ul = document.createElement('ul');
     ul.classList.add('grid-style');
@@ -62,18 +60,19 @@ function displayLibrary() {
 
     //append it to the table wrapper
     container.appendChild(div);
-
   });
 }
 
 function alreadyAdd(titleNewBook) {
   let newBook = titleNewBook.replace(/\s+/g, '').toLowerCase();
-  myLibrary.forEach(function (Book) {
-    let currentBook = Book.replace(/\s+/g, '').toLowerCase();
+
+  for (let i = 0; i < myLibrary.length; i++) {
+    let currentBook = myLibrary[i].title;
+    currentBook = currentBook.replace(/\s+/g, '').toLowerCase();
     if (newBook === currentBook) {
       return true;
     }
-  });
+  }
   return false;
 }
 
@@ -100,11 +99,13 @@ function addBookToLibrary() {
 
   if (myLibrary.length === 0) {
     myLibrary.push(newBook);
+    displayLibrary();
   } else {
     if (alreadyAdd(newBook.title)) {
       return;
     } else {
       myLibrary.push(newBook);
+      displayLibrary();
     }
   }
 }
