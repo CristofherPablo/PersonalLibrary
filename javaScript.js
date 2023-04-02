@@ -76,27 +76,30 @@ class Book {
   }
 }
 
-function deleteBook(alt) {
-  console.log('hi');
-  if (myLibrary.length === 1) {
-    myLibrary.push();
-    cleanContainer();
-  }
-  const deleteIndex = alt.split(' ');
-  console.log(deleteIndex[3]);
+function deleteBook(img) {
+  
+  // getting the index of the book to be deleted
+  let deleteIndex = img.alt.split(' ');
+  deleteIndex = deleteIndex[3] * 1;
+  
+
+  myLibrary.splice(deleteIndex, 1);
+  cleanContainer();
+  displayLibrary(myLibrary);
+
+  
 }
 
 function listeningDeleteBtn() {
   let deleteBookBnt = document.querySelectorAll('.deleteBook');
   deleteBookBnt.forEach(function (button) {
     button.addEventListener('click', (event) => {
-      console.log('listening');
-      deleteBook(event.target.alt);
+      deleteBook(event.target);
     });
   });
 }
 
-function displayLibrary() {
+function displayLibrary(myLibrary) {
   if (myLibrary.length === 0) {
     return;
   }
@@ -166,6 +169,8 @@ function displayLibrary() {
     //append it to the table wrapper
     container.appendChild(div);
   });
+
+  listeningDeleteBtn();
 }
 
 function cleanContainer() {
@@ -216,8 +221,7 @@ function addBookToLibrary() {
   if (myLibrary.length === 0) {
     myLibrary.push(newBook);
     cleanContainer();
-    displayLibrary();
-    listeningDeleteBtn();
+    displayLibrary(myLibrary);
 
     console.log(newBook);
   } else {
@@ -226,8 +230,7 @@ function addBookToLibrary() {
     } else {
       myLibrary.push(newBook);
       cleanContainer();
-      displayLibrary();
-      listeningDeleteBtn();
+      displayLibrary(myLibrary);
     }
   }
 }
@@ -341,8 +344,4 @@ addBookBnt.addEventListener('click', (event) => {
   }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  listeningDeleteBtn();
-});
-
-displayLibrary();
+displayLibrary(myLibrary);

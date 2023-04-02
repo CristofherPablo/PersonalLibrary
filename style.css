@@ -262,6 +262,10 @@ input:focus {
   height: 25px;
 }
 
+.wrapper .main .bookTable .tableContent .crudButton + .crudButton{
+  margin: 3px;
+}
+
 .wrapper .main .bookTable .tableContent .deleteBook,
 .wrapper .main .bookTable .tableContent .editBook{
   width: 20px;
