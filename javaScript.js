@@ -82,12 +82,21 @@ function deleteBook(img) {
   let deleteIndex = img.alt.split(' ');
   deleteIndex = deleteIndex[3] * 1;
   
+  myLibrary.forEach((book) => {
+    if (book.index > deleteIndex) {
+      book.index = book.index - 1;
+    }
+  });
 
   myLibrary.splice(deleteIndex, 1);
   cleanContainer();
   displayLibrary(myLibrary);
-
   
+}
+
+function cleanForm () {
+  let form = document.querySelector('form');
+  form.reset();
 }
 
 function listeningDeleteBtn() {
@@ -217,6 +226,8 @@ function addBookToLibrary() {
     readStatus,
     index
   );
+
+  cleanForm();
 
   if (myLibrary.length === 0) {
     myLibrary.push(newBook);
