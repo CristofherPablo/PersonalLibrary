@@ -130,7 +130,29 @@ function listeningReadUnreadBtn() {
   });
 }
 
+function updateMainHeader () {
+  let total = document.getElementById('totalBooks');
+  let read = document.getElementById('booksRead');
+  let unread = document.getElementById('booksUnread');
+  let countTotal = myLibrary.length;
+  let countRead = 0;
+  let countUnRead = 0;
+
+  myLibrary.forEach((book) => {
+    if (book.readStatus) {
+      countRead += 1;
+    }else{
+      countUnRead += 1;
+    }
+  });
+
+  total.innerText = countTotal;
+  read.innerText = countRead;
+  unread.innerText = countUnRead;
+}
+
 function displayLibrary(myLibrary) {
+
   if (myLibrary.length === 0) {
     return;
   }
@@ -210,6 +232,7 @@ function displayLibrary(myLibrary) {
 
   listeningDeleteBtn();
   listeningReadUnreadBtn();
+  updateMainHeader();
 }
 
 function cleanContainer() {
