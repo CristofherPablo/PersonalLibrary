@@ -77,11 +77,10 @@ class Book {
 }
 
 function deleteBook(img) {
-  
   // getting the index of the book to be deleted
   let deleteIndex = img.alt.split(' ');
   deleteIndex = deleteIndex[3] * 1;
-  
+
   myLibrary.forEach((book) => {
     if (book.index > deleteIndex) {
       book.index = book.index - 1;
@@ -91,10 +90,9 @@ function deleteBook(img) {
   myLibrary.splice(deleteIndex, 1);
   cleanContainer();
   displayLibrary(myLibrary);
-  
 }
 
-function cleanForm () {
+function cleanForm() {
   let form = document.querySelector('form');
   form.reset();
 }
@@ -104,6 +102,30 @@ function listeningDeleteBtn() {
   deleteBookBnt.forEach(function (button) {
     button.addEventListener('click', (event) => {
       deleteBook(event.target);
+    });
+  });
+}
+
+function toggleButton(button) {
+  let index = parseInt(button.id);
+
+  if (myLibrary[index].readStatus) {
+    myLibrary[index].readStatus = false;
+    cleanContainer();
+    displayLibrary(myLibrary);
+  }else{
+    myLibrary[index].readStatus = true;
+    cleanContainer();
+    displayLibrary(myLibrary);
+  }
+}
+
+function listeningReadUnreadBtn() {
+  let readUnreadBtn = document.querySelectorAll('.toggle-read');
+
+  readUnreadBtn.forEach(function (button) {
+    button.addEventListener('click', (event) => {
+      toggleButton(event.target);
     });
   });
 }
@@ -137,12 +159,19 @@ function displayLibrary(myLibrary) {
     const li5 = document.createElement('li');
     li5.textContent = `${Book.acquired}`;
 
+    //creating the a button to toggle read/unread status
     const li6 = document.createElement('li');
+    const a = document.createElement('a');
+    a.classList.add('toggle-read');
+    a.setAttribute('id', `${Book.index}`);
     if (Book.readStatus) {
-      li6.textContent = 'Read';
+      a.textContent = 'Read';
+      a.classList.add('readBook');
     } else {
-      li6.textContent = 'Unread';
+      a.textContent = 'Unread';
+      a.classList.add('unReadBook');
     }
+    li6.appendChild(a);
     // creating the imgs for delete and update
     const deleteImg = document.createElement('img');
     deleteImg.classList.add('deleteBook');
@@ -180,6 +209,7 @@ function displayLibrary(myLibrary) {
   });
 
   listeningDeleteBtn();
+  listeningReadUnreadBtn();
 }
 
 function cleanContainer() {

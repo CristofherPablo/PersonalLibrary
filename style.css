@@ -278,7 +278,26 @@ input:focus {
   transform: scale(1.1);
   filter: brightness(80%);
 }
+/* set up for read/uread a link */
+.wrapper .main .bookTable .tableContent .toggle-read{
+  cursor: pointer;
+  transition: 0.3s}
 
+.wrapper .main .bookTable .tableContent .toggle-read:hover{
+  transform: scale(1.1);
+  text-decoration: underline;
+}
+
+.wrapper .main .bookTable .tableContent .readBook{
+  color: rgb(24, 239, 110);
+}
+
+.wrapper .main .bookTable .tableContent .unReadBook{
+  color: rgb(243, 29, 29);
+}
+
+
+/* footer layout */
 footer {
   display: flex;
   justify-content: center;
