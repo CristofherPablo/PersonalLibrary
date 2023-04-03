@@ -62,6 +62,42 @@ let myLibrary = [
     readStatus: true,
     index: 6,
   },
+  {
+    title: 'The Catcher In The Rye',
+    author: 'J. D. Salinger',
+    pages: 224,
+    release: '1951',
+    acquired: '11/05/2022',
+    readStatus: false,
+    index: 7,
+    },
+  {
+    title: 'The Girl On The Train',
+    author: 'Paula Hawkins',
+    pages: 336,
+    release: '2015',
+    acquired: '02/15/2023',
+    readStatus: false,
+    index: 8,
+    },
+  {
+    title: 'The Great Gatsby',
+    author: 'F. Scott Fitzgerald',
+    pages: 180,
+    release: '1925',
+    acquired: '04/12/2023',
+    readStatus: false,
+    index: 9,
+    },
+  {
+    title: 'The Catcher in the Rye',
+    author: 'J.D. Salinger',
+    pages: 277,
+    release: '07/16/1951',
+    acquired: '06/25/2022',
+    readStatus: true,
+    index: 10,
+  },
 ];
 
 class Book {
@@ -134,7 +170,7 @@ function updateMainHeader() {
   let total = document.getElementById('totalBooks');
   let read = document.getElementById('booksRead');
   let unread = document.getElementById('booksUnread');
-  
+
   if (myLibrary.length === 0) {
     total.innerText = 0;
     read.innerText = 0;

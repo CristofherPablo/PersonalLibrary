@@ -189,10 +189,13 @@ input:focus {
 .wrapper .main {
   background-color: var(--colorBody);
   box-sizing: border-box;
+  overflow: auto;
 }
 
 /* Header main content */
 .wrapper .main .header-main{
+  position: sticky;
+  top: 0;
   background-color: var(--colorIcon);
   padding: 10px;
   color: var(--colorFont);
@@ -215,6 +218,7 @@ input:focus {
 .wrapper .main .wrapper-main{
   box-sizing: border-box;
   margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .wrapper .main .wrapper-main .bookTable{
