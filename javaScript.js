@@ -113,7 +113,7 @@ function toggleButton(button) {
     myLibrary[index].readStatus = false;
     cleanContainer();
     displayLibrary(myLibrary);
-  }else{
+  } else {
     myLibrary[index].readStatus = true;
     cleanContainer();
     displayLibrary(myLibrary);
@@ -130,10 +130,18 @@ function listeningReadUnreadBtn() {
   });
 }
 
-function updateMainHeader () {
+function updateMainHeader() {
   let total = document.getElementById('totalBooks');
   let read = document.getElementById('booksRead');
   let unread = document.getElementById('booksUnread');
+  
+  if (myLibrary.length === 0) {
+    total.innerText = 0;
+    read.innerText = 0;
+    unread.innerText = 0;
+    return;
+  }
+
   let countTotal = myLibrary.length;
   let countRead = 0;
   let countUnRead = 0;
@@ -141,7 +149,7 @@ function updateMainHeader () {
   myLibrary.forEach((book) => {
     if (book.readStatus) {
       countRead += 1;
-    }else{
+    } else {
       countUnRead += 1;
     }
   });
@@ -152,8 +160,8 @@ function updateMainHeader () {
 }
 
 function displayLibrary(myLibrary) {
-
   if (myLibrary.length === 0) {
+    updateMainHeader();
     return;
   }
 
