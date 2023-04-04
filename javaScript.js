@@ -156,6 +156,57 @@ function toggleButton(button) {
   }
 }
 
+function editBook (targetBook) {
+  const updateBook = document.querySelectorAll(`[data-update-button]`);
+  
+  
+}
+
+function closeEditPopUp () {
+  const editCard = document.querySelectorAll('.editBook');
+  const overlay = document.getElementById('overlay');
+
+  editCard.forEach((button) => {
+    button.classList.remove('active');
+  });
+  
+  overlay.classList.remove('active');
+}
+
+
+function displayEditPopUp () {
+  const editCard = document.querySelectorAll('.editBook');
+  const overlay = document.getElementById('overlay');
+
+  editCard.forEach((button) => {
+    button.classList.add('active');
+  });
+
+  overlay.classList.add('active');
+} 
+
+function listenCloseEditBtn () {
+  const cancelUpdate = document.querySelectorAll('#cancel');
+
+  cancelUpdate.forEach ( function (button) {
+    button.addEventListener('click', () => {
+      cleanForm();
+      closeEditPopUp();
+    });
+  });
+}
+
+function listenEditBtn () {
+  const editButton = document.querySelectorAll('.edit');
+
+  editButton.forEach (function (button) {
+    button.addEventListener('click', (event) => {
+      //editBook(event.target);
+      displayEditPopUp();
+    });
+  });
+}
+
 function listeningReadUnreadBtn() {
   let readUnreadBtn = document.querySelectorAll('.toggle-read');
 
@@ -276,6 +327,7 @@ function displayLibrary(myLibrary) {
 
   listeningDeleteBtn();
   listeningReadUnreadBtn();
+  listenEditBtn();
   updateMainHeader();
 }
 
@@ -453,3 +505,4 @@ addBookBnt.addEventListener('click', (event) => {
 });
 
 displayLibrary(myLibrary);
+listenCloseEditBtn();

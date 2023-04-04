@@ -204,6 +204,7 @@ input:focus {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
   z-index: 10;
   width: 324px;
   height: 450px;
@@ -241,6 +242,7 @@ input:focus {
   left: 0;
   right: 0;
   bottom: 0;
+  transition: 200ms ease-in-out;
   background-color: rgba(0,0,0,.5);
   pointer-events: none;
 }
