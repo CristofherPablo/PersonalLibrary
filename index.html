@@ -114,7 +114,7 @@
       </section>
 
       <section class="main">
-        
+
         <div class="header-main">
           <nav>
             <ul>
@@ -150,6 +150,106 @@
             <div id="tableContainer"></div>
         </div>
       </section>
+
+<!--      Pop up to edit book         -->
+
+      <section class="editBook">
+        <div class="editForm">
+          <h1>Edit Book</h1>
+          <form autocomplete="off">
+            <div class="inputBlock">
+              <input
+                id="title"
+                class="input-transparent"
+                type="text"
+                required
+              />
+              <span class="placeHolder">Title of the book</span>
+              <div class="validationSection title">
+                <p>This field is required!!</p>
+              </div>
+            </div>
+
+            <div class="inputBlock">
+              <input
+                id="author"
+                class="input-transparent"
+                type="text"
+                required
+              />
+              <span class="placeHolder">Name of the author</span>
+              <div class="validationSection author">
+                <p>This field is required!!</p>
+              </div>
+            </div>
+
+            <div class="inputBlock">
+              <input
+                id="pages"
+                class="input-transparent"
+                type="number"
+                min="1"
+                max="9999"
+                required
+              />
+              <span class="placeHolder">How many pages</span>
+              <div class="validationSection pages">
+                <p>This field is required!!</p>
+              </div>
+              <div class="validationSection pages err">
+                <p>Value not Valid!!</p>
+              </div>
+            </div>
+
+            <div class="inputBlock">
+              <input
+                id="release"
+                class="input-transparent"
+                type="date"
+                required
+              />
+              <span class="placeHolder">Release date</span>
+              <div class="validationSection release">
+                <p>This field is required!!</p>
+              </div>
+              <div class="validationSection release err">
+                <p>Value not Valid!!</p>
+              </div>
+            </div>
+
+            <div class="inputBlock">
+              <input
+                id="acquired"
+                class="input-transparent"
+                type="date"
+                required
+              />
+              <span class="placeHolder">Acquired date</span>
+              <div class="validationSection acquired">
+                <p>This field is required!!</p>
+              </div>
+              <div class="validationSection acquired err">
+                <p>Value not Valid!!</p>
+              </div>
+            </div>
+
+            <div class="inputBlock" id="checkbox">
+              <input id="read" class="input-transparent" type="checkbox" />
+              <label>Already read this book</label>
+            </div>
+
+            <div class="buttons">
+              <button id="editBook">Edit</button>
+              <button id="cancel">Cancel</button>
+            </div>
+            
+          </form>
+        </div>
+      </section>
+
+<!--      div to overflow and make a blur effect     -->
+      <div id="overlay"></div>
+
       <footer>
         <p>
           Made by

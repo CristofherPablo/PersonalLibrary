@@ -71,7 +71,8 @@ body{
 
 /* SideBar Form setup */
 
-.sideForm {
+.sideForm,
+.editBook {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -82,7 +83,8 @@ body{
   font-family: var(--robotoFont);
 }
 
-.sideContent form {
+.sideContent form,
+.editForm form {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -92,11 +94,13 @@ body{
   box-sizing: border-box;
 }
 
-.sideContent .sideForm h1{
+.sideContent .sideForm h1,
+.editForm h1{
   text-shadow: var(--boxShadow);
 }
 
-.sideContent form .input-transparent {
+.sideContent form .input-transparent,
+.editForm form .input-transparent{
   border: none;
   width: 100%;
   background-color: var(--colorBG);
@@ -110,11 +114,13 @@ transitioning the span place holder to stay inside the form point of view, till 
 
 */
 
-.sideContent form .inputBlock {
+.sideContent form .inputBlock,
+.editForm form .inputBlock{
   position: relative;
 }
 
-.sideContent form .inputBlock span.placeHolder {
+.sideContent form .inputBlock span.placeHolder,
+.editForm form .inputBlock span.placeHolder{
   position: absolute;
   left: 0;
   transition: all 0.3s;
@@ -154,24 +160,28 @@ input:focus {
 
 /* Checkbox setup */
 
-.sideContent form #checkbox{
+.sideContent form #checkbox,
+.editForm form #checkbox{
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.sideContent form #checkbox input{
+.sideContent form #checkbox input,
+.editForm form #checkbox input{
   width: 20px;
   height: 20px;
 }
 
-.sideContent form #checkbox input[type='checkbox']{
+.sideContent form #checkbox input[type='checkbox'],
+.editForm form #checkbox input[type='checkbox']{
   accent-color: var(--colorDetail);
 }
 
 /* Button settings */
 
-.sideContent form button{
+.sideContent form button,
+.editForm form button{
   width: 150px;
   height: 40px;
   margin: 0 auto;
@@ -182,10 +192,65 @@ input:focus {
   cursor: pointer;
 }
 
-.sideContent form button:hover{
+.sideContent form button:hover,
+.editForm form button:hover{
   background-color: var(--colorIcon);
 }
 
+/* Edit popUp set up */
+
+.editBook{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 10;
+  width: 324px;
+  height: 450px;
+  background-color: var(--colorBG);
+  border: 1px solid var(--colorDetail);
+  text-align: center;
+  border-radius: 10px;
+}
+
+.editBook.active{
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.editBook .buttons{
+  display: flex;
+  justify-content: space-around;
+}
+
+.editBook .buttons button{
+  width: 80px;
+}
+
+#cancel{
+  background-color: rgb(181, 59, 59);
+}
+
+#cancel:hover{
+  background-color: rgba(181, 59, 59, 0.7);
+}
+
+#overlay{
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.5);
+  pointer-events: none;
+}
+
+#overlay.active{
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* wrapper main  */
 .wrapper .main {
   background-color: var(--colorBody);
   box-sizing: border-box;
@@ -271,14 +336,13 @@ input:focus {
 }
 
 .wrapper .main .bookTable .tableContent .deleteBook,
-.wrapper .main .bookTable .tableContent .editBook{
+.wrapper .main .bookTable .tableContent .edit{
   width: 20px;
   transition: 0.4s;
-  
 }
 
 .wrapper .main .bookTable .tableContent .deleteBook:hover,
-.wrapper .main .bookTable .tableContent .editBook:hover{
+.wrapper .main .bookTable .tableContent .edit:hover{
   transform: scale(1.1);
   filter: brightness(80%);
 }

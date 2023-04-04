@@ -248,7 +248,7 @@ function displayLibrary(myLibrary) {
     deleteBtn.appendChild(deleteImg);
 
     const updateImg = document.createElement('img');
-    updateImg.classList.add('editBook');
+    updateImg.classList.add('edit');
     updateImg.setAttribute('Alt', 'update image index ' + `${Book.index}`);
     updateImg.src = 'assets/edit.png';
     const updateBtn = document.createElement('button');
