@@ -207,7 +207,7 @@ input:focus {
   transition: 200ms ease-in-out;
   z-index: 10;
   width: 324px;
-  height: 450px;
+  padding: 20px;
   background-color: var(--colorBG);
   border: 1px solid var(--colorDetail);
   text-align: center;

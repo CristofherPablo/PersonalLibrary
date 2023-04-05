@@ -475,53 +475,53 @@ function validationForm(
   const currentYear = currentDate.getFullYear();
 
   if (title === '') {
-    let p = document.querySelector('.validationSection.title');
+    let p = document.querySelector(`.validationSection.${newTitle}`);
     p.style.display = 'block';
   } else {
-    let p = document.querySelector('.validationSection.title');
+    let p = document.querySelector(`.validationSection.${newTitle}`);
     p.style.display = 'none';
     isValid += 1;
   }
 
   if (author === '') {
-    let p = document.querySelector('.validationSection.author');
+    let p = document.querySelector(`.validationSection.${newAuthor}`);
     p.style.display = 'block';
   } else {
-    let p = document.querySelector('.validationSection.author');
+    let p = document.querySelector(`.validationSection.${newAuthor}`);
     p.style.display = 'none';
     isValid += 1;
   }
 
   if (isNaN(pages)) {
-    let p2 = document.querySelector('.validationSection.pages.err');
+    let p2 = document.querySelector(`.validationSection.${newPages}.err`);
     p2.style.display = 'none';
 
-    let p = document.querySelector('.validationSection.pages');
+    let p = document.querySelector(`.validationSection.${newPages}`);
     p.style.display = 'block';
   } else if (pages < 1 || pages > 9999) {
-    let p = document.querySelector('.validationSection.pages');
+    let p = document.querySelector(`.validationSection.${newPages}`);
     p.style.display = 'none';
 
-    let p2 = document.querySelector('.validationSection.pages.err');
+    let p2 = document.querySelector(`.validationSection.${newPages}.err`);
     p2.style.display = 'block';
   } else {
-    let p = document.querySelector('.validationSection.pages');
+    let p = document.querySelector(`.validationSection.${newPages}`);
     p.style.display = 'none';
 
-    let p2 = document.querySelector('.validationSection.pages.err');
+    let p2 = document.querySelector(`.validationSection.${newPages}.err`);
     p2.style.display = 'none';
     isValid += 1;
   }
 
   if (release === '') {
-    let p = document.querySelector('.validationSection.release');
-    let pErr = document.querySelector('.validationSection.release.err');
+    let p = document.querySelector(`.validationSection.${newRelease}`);
+    let pErr = document.querySelector(`.validationSection.${newRelease}.err`);
     pErr.style.display = 'none';
     p.style.display = 'block';
   } else {
     let checkDate = release.split('-');
-    let p = document.querySelector('.validationSection.release');
-    let pErr = document.querySelector('.validationSection.release.err');
+    let p = document.querySelector(`.validationSection.${newRelease}`);
+    let pErr = document.querySelector(`.validationSection.${newRelease}.err`);
 
     if (checkDate[0].length > 4) {
       p.style.display = 'none';
@@ -537,14 +537,14 @@ function validationForm(
   }
 
   if (acquired === '') {
-    let p = document.querySelector('.validationSection.acquired');
-    let pErr = document.querySelector('.validationSection.acquired.err');
+    let p = document.querySelector(`.validationSection.${newAcquired}`);
+    let pErr = document.querySelector(`.validationSection.${newAcquired}.err`);
     pErr.style.display = 'none';
     p.style.display = 'block';
   } else {
     let checkDate = acquired.split('-');
-    let p = document.querySelector('.validationSection.acquired');
-    let pErr = document.querySelector('.validationSection.acquired.err');
+    let p = document.querySelector(`.validationSection.${newAcquired}`);
+    let pErr = document.querySelector(`.validationSection.${newAcquired}.err`);
 
     if (checkDate[0].length > 4) {
       p.style.display = 'none';
