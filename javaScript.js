@@ -70,7 +70,7 @@ let myLibrary = [
     acquired: '11/05/2022',
     readStatus: false,
     index: 7,
-    },
+  },
   {
     title: 'The Girl On The Train',
     author: 'Paula Hawkins',
@@ -79,7 +79,7 @@ let myLibrary = [
     acquired: '02/15/2023',
     readStatus: false,
     index: 8,
-    },
+  },
   {
     title: 'The Great Gatsby',
     author: 'F. Scott Fitzgerald',
@@ -88,7 +88,7 @@ let myLibrary = [
     acquired: '04/12/2023',
     readStatus: false,
     index: 9,
-    },
+  },
   {
     title: 'The Catcher in the Rye',
     author: 'J.D. Salinger',
@@ -156,25 +156,20 @@ function toggleButton(button) {
   }
 }
 
-function editBook (targetBook) {
-  const updateBook = document.querySelectorAll(`[data-update-button]`);
-  
-  
-}
+function editBook(targetBook) {}
 
-function closeEditPopUp () {
+function closeEditPopUp() {
   const editCard = document.querySelectorAll('.editBook');
   const overlay = document.getElementById('overlay');
 
   editCard.forEach((button) => {
     button.classList.remove('active');
   });
-  
+
   overlay.classList.remove('active');
 }
 
-
-function displayEditPopUp () {
+function displayEditPopUp() {
   const editCard = document.querySelectorAll('.editBook');
   const overlay = document.getElementById('overlay');
 
@@ -183,12 +178,12 @@ function displayEditPopUp () {
   });
 
   overlay.classList.add('active');
-} 
+}
 
-function listenCloseEditBtn () {
+function listenCloseEditBtn() {
   const cancelUpdate = document.querySelectorAll('#cancel');
 
-  cancelUpdate.forEach ( function (button) {
+  cancelUpdate.forEach(function (button) {
     button.addEventListener('click', () => {
       cleanForm();
       closeEditPopUp();
@@ -196,12 +191,46 @@ function listenCloseEditBtn () {
   });
 }
 
-function listenEditBtn () {
+function fillFormEdit(edit) {
+  // getting the index of the book to be deleted
+  let editIndex = edit.alt.split(' ');
+  editIndex = editIndex[3] * 1;
+
+  //filling form
+  document.getElementById('titleEdit').value = myLibrary[editIndex].title;
+  document.getElementById('authorEdit').value = myLibrary[editIndex].author;
+  document.getElementById('pagesEdit').value = myLibrary[editIndex].pages;
+
+  //setting data to be like the default setting
+  let dateString = myLibrary[editIndex].release;
+  let [day, month, year] = dateString.split('/');
+  let dateObj = new Date(year, month - 1, day);
+  let formattedDate = dateObj.toISOString().split('T')[0];
+  
+  document.getElementById('releaseEdit').value = formattedDate;
+
+  dateString = myLibrary[editIndex].acquired;
+  [day, month, year] = dateString.split('/');
+  dateObj = new Date(year, month - 1, day);
+  formattedDate = dateObj.toISOString().split('T')[0];
+
+  let settingIndex = document.getElementById('acquiredEdit');
+  settingIndex.value = formattedDate;
+  settingIndex.setAttribute('data-close', editIndex);
+
+  if (myLibrary[editIndex].readStatus) {
+    document.getElementById('readEdit').checked = true;
+  } else {
+    document.getElementById('readEdit').checked = false;
+  }
+}
+
+function listenEditBtn() {
   const editButton = document.querySelectorAll('.edit');
 
-  editButton.forEach (function (button) {
+  editButton.forEach(function (button) {
     button.addEventListener('click', (event) => {
-      //editBook(event.target);
+      fillFormEdit(event.target);
       displayEditPopUp();
     });
   });
@@ -396,12 +425,18 @@ function addBookToLibrary() {
 }
 
 //validating the form
-function validationForm() {
-  let title = document.getElementById('title').value.replace(/\s+/g, '');
-  let author = document.getElementById('author').value.replace(/\s+/g, '');
-  let pages = parseInt(document.getElementById('pages').value);
-  let release = document.getElementById('release').value;
-  let acquired = document.getElementById('acquired').value;
+function validationForm(
+  newTitle,
+  newAuthor,
+  newPages,
+  newRelease,
+  newAcquired
+) {
+  let title = document.getElementById(newTitle).value.replace(/\s+/g, '');
+  let author = document.getElementById(newAuthor).value.replace(/\s+/g, '');
+  let pages = parseInt(document.getElementById(newPages).value);
+  let release = document.getElementById(newRelease).value;
+  let acquired = document.getElementById(newAcquired).value;
   let isValid = 0;
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
@@ -494,12 +529,20 @@ function validationForm() {
   return isValid;
 }
 
+let sendEditForm = document.getElementById('edit');
+sendEditForm.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  if (validationForm('title', 'author', 'pages', 'release', 'acquired') === 5) {
+  }
+});
+
 let addBookBnt = document.getElementById('addBook');
 
 addBookBnt.addEventListener('click', (event) => {
   event.preventDefault();
 
-  if (validationForm() === 5) {
+  if (validationForm('title', 'author', 'pages', 'release', 'acquired') === 5) {
     addBookToLibrary();
   }
 });
