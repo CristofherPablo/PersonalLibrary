@@ -22,38 +22,15 @@ class Book {
     myLibrary.splice(this.index, 1);
   };
 
-  editBook = () => {
-    let newTitle = document
-      .getElementById('titleEdit')
-      .value.replace(/^\s+|\s+$/gm, '');
-    let newAuthor = document
-      .getElementById('authorEdit')
-      .value.replace(/^\s+|\s+$/gm, '');
-    let newPages = parseInt(document.getElementById('pagesEdit').value);
-    let release = document.getElementById('releaseEdit').value.split('-');
-    let setDateRight =
-      `${release[2]}` + '/' + `${release[1]}` + '/' + `${release[0]}`;
-    release = setDateRight;
-    let acquired = document.getElementById('acquiredEdit').value.split('-');
-    setDateRight =
-      `${acquired[2]}` + '/' + `${acquired[1]}` + '/' + `${acquired[0]}`;
-    acquired = setDateRight;
-    let newReadStatus = document.getElementById('readEdit').checked;
+  editBook = (bookToEdit) => {
   
-    let index = document.getElementById('acquiredEdit');
-    index = index.getAttribute('data-index');
+    this.title = bookToEdit.title;
+    this.author = bookToEdit.author;
+    this.pages = bookToEdit.pages;
+    this.release = bookToEdit.release;
+    this.acquired = bookToEdit.acquired;
+    this.readStatus = bookToEdit.readStatus;
   
-    myLibrary[index].title = newTitle;
-    myLibrary[index].author = newAuthor;
-    myLibrary[index].pages = newPages;
-    myLibrary[index].release = release;
-    myLibrary[index].acquired = acquired;
-    myLibrary[index].readStatus = newReadStatus;
-  
-    cleanContainer();
-    displayLibrary(myLibrary);
-    cleanForm();
-    closeEditPopUp();
   }
 }
 
