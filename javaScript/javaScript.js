@@ -308,53 +308,57 @@ function validationForm(bookInformation, formType) {
   const currentYear = currentDate.getFullYear();
 
   if (bookInformation.title === '') {
-    let p = document.querySelector(`.validationSection.${formType}`);
+    let p = document.querySelector(`.validationSection.${formType}Title`);
     p.style.display = 'block';
   } else {
-    let p = document.querySelector(`.validationSection.${formType}`);
+    let p = document.querySelector(`.validationSection.${formType}Title`);
     p.style.display = 'none';
     isValid += 1;
   }
 
   if (bookInformation.author === '') {
-    let p = document.querySelector(`.validationSection.${formType}`);
+    let p = document.querySelector(`.validationSection.${formType}Author`);
     p.style.display = 'block';
   } else {
-    let p = document.querySelector(`.validationSection.${formType}`);
+    let p = document.querySelector(`.validationSection.${formType}Author`);
     p.style.display = 'none';
     isValid += 1;
   }
 
   if (isNaN(bookInformation.pages)) {
-    let p2 = document.querySelector(`.validationSection.${formType}.err`);
+    let p2 = document.querySelector(`.validationSection.${formType}Pages.err`);
     p2.style.display = 'none';
 
-    let p = document.querySelector(`.validationSection.${formType}`);
+    let p = document.querySelector(`.validationSection.${formType}Pages`);
     p.style.display = 'block';
-  } else if (pages < 1 || pages > 9999) {
-    let p = document.querySelector(`.validationSection.${formType}`);
-    p.style.display = 'none';
+  } else if (bookInformation.pages < 1 || bookInformation.pages > 9999) {
+    let p = document.querySelector(`.validationSection.${formType}Pages`);
+    p.style.display = 'block';
 
-    let p2 = document.querySelector(`.validationSection.${formType}.err`);
-    p2.style.display = 'block';
+    let p2 = document.querySelector(`.validationSection.${formType}Pages.err`);
+    p2.style.display = 'none';
   } else {
-    let p = document.querySelector(`.validationSection.${formType}`);
+    let p = document.querySelector(`.validationSection.${formType}Pages`);
     p.style.display = 'none';
 
-    let p2 = document.querySelector(`.validationSection.${formType}.err`);
+    let p2 = document.querySelector(`.validationSection.${formType}Pages.err`);
     p2.style.display = 'none';
     isValid += 1;
   }
 
   if (bookInformation.release === '') {
-    let p = document.querySelector(`.validationSection.${formType}`);
-    let pErr = document.querySelector(`.validationSection.${formType}.err`);
+    let p = document.querySelector(`.validationSection.${formType}Release`);
+    let pErr = document.querySelector(
+      `.validationSection.${formType}Release.err`
+    );
     pErr.style.display = 'none';
     p.style.display = 'block';
   } else {
     let checkDate = bookInformation.release.split('/');
-    let p = document.querySelector(`.validationSection.${formType}`);
-    let pErr = document.querySelector(`.validationSection.${formType}.err`);
+    let p = document.querySelector(`.validationSection.${formType}Release`);
+    let pErr = document.querySelector(
+      `.validationSection.${formType}Release.err`
+    );
 
     if (checkDate[2].length > 4) {
       p.style.display = 'none';
@@ -370,14 +374,18 @@ function validationForm(bookInformation, formType) {
   }
 
   if (bookInformation.acquired === '') {
-    let p = document.querySelector(`.validationSection.${formType}`);
-    let pErr = document.querySelector(`.validationSection.${formType}.err`);
+    let p = document.querySelector(`.validationSection.${formType}Acquired`);
+    let pErr = document.querySelector(
+      `.validationSection.${formType}Acquired.err`
+    );
     pErr.style.display = 'none';
     p.style.display = 'block';
   } else {
     let checkDate = bookInformation.acquired.split('/');
-    let p = document.querySelector(`.validationSection.${formType}`);
-    let pErr = document.querySelector(`.validationSection.${formType}.err`);
+    let p = document.querySelector(`.validationSection.${formType}Acquired`);
+    let pErr = document.querySelector(
+      `.validationSection.${formType}Acquired.err`
+    );
 
     if (checkDate[2].length > 4) {
       p.style.display = 'none';
@@ -403,20 +411,36 @@ function retrieveFormInformation(
   getAcquired,
   getReadStatus
 ) {
-  let title = document.getElementById(getTitle).value.replace(/\s+/g, '');
-  let author = document.getElementById(getAuthor).value.replace(/\s+/g, '');
+  let title = document
+    .getElementById(getTitle)
+    .value.replace(/^\s+|\s+$/gm, '');
+  let author = document
+    .getElementById(getAuthor)
+    .value.replace(/^\s+|\s+$/gm, '');
   let pages = parseInt(document.getElementById(getPages).value);
   let release = document.getElementById(getRelease).value.split('-');
   let acquired = document.getElementById(getAcquired).value.split('-');
   let readStatus = document.getElementById(getReadStatus).checked;
 
-  //setting dates to the format of DD/MM/YYYY
-  let setDateRight =
-    `${release[2]}` + '/' + `${release[1]}` + '/' + `${release[0]}`;
-  release = setDateRight;
-  setDateRight =
-    `${acquired[2]}` + '/' + `${acquired[1]}` + '/' + `${acquired[0]}`;
-  acquired = setDateRight;
+  //Checking if the date is invalid
+  let setDateRight;
+  if (release[0] === '' || release[1] === '' || release[2] === '') {
+    release = '';
+  } else {
+    //setting dates to the format of DD/MM/YYYY
+    setDateRight =
+      `${release[2]}` + '/' + `${release[1]}` + '/' + `${release[0]}`;
+    release = setDateRight;
+  }
+
+  if (acquired[0] === '' || acquired[1] === '' || acquired[2] === '') {
+    acquired = '';
+  } else {
+    setDateRight =
+      `${acquired[2]}` + '/' + `${acquired[1]}` + '/' + `${acquired[0]}`;
+    acquired = setDateRight;
+  }
+
   // Return object with all the form data
   return {
     title: title,
@@ -441,12 +465,7 @@ sendEditForm.addEventListener('click', (event) => {
     'readEdit'
   );
 
-  console.log(bookInformation);
-
-  if (
-    validationForm(bookInformation, 'editForm') === 5 &&
-    bookEditIndex != -1
-  ) {
+  if (validationForm(bookInformation, 'edit') === 5 && bookEditIndex != -1) {
     console.log('entrou');
     editBook();
   }

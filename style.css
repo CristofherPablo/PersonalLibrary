@@ -27,7 +27,7 @@ body {
   box-sizing: border-box;
 }
 
-body{
+body {
   height: 100vh;
 }
 
@@ -95,12 +95,12 @@ body{
 }
 
 .sideContent .sideForm h1,
-.editForm h1{
+.editForm h1 {
   text-shadow: var(--boxShadow);
 }
 
 .sideContent form .input-transparent,
-.editForm form .input-transparent{
+.editForm form .input-transparent {
   border: none;
   width: 100%;
   background-color: var(--colorBG);
@@ -115,12 +115,12 @@ transitioning the span place holder to stay inside the form point of view, till 
 */
 
 .sideContent form .inputBlock,
-.editForm form .inputBlock{
+.editForm form .inputBlock {
   position: relative;
 }
 
 .sideContent form .inputBlock span.placeHolder,
-.editForm form .inputBlock span.placeHolder{
+.editForm form .inputBlock span.placeHolder {
   position: absolute;
   left: 0;
   transition: all 0.3s;
@@ -161,27 +161,27 @@ input:focus {
 /* Checkbox setup */
 
 .sideContent form #checkbox,
-.editForm form #checkbox{
+.editForm form #checkbox {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
 .sideContent form #checkbox input,
-.editForm form #checkbox input{
+.editForm form #checkbox input {
   width: 20px;
   height: 20px;
 }
 
 .sideContent form #checkbox input[type='checkbox'],
-.editForm form #checkbox input[type='checkbox']{
+.editForm form #checkbox input[type='checkbox'] {
   accent-color: var(--colorDetail);
 }
 
 /* Button settings */
 
 .sideContent form button,
-.editForm form button{
+.editForm form button {
   width: 150px;
   height: 40px;
   margin: 0 auto;
@@ -193,13 +193,13 @@ input:focus {
 }
 
 .sideContent form button:hover,
-.editForm form button:hover{
+.editForm form button:hover {
   background-color: var(--colorIcon);
 }
 
 /* Edit popUp set up */
 
-.editBook{
+.editBook {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -214,28 +214,28 @@ input:focus {
   border-radius: 10px;
 }
 
-.editBook.active{
+.editBook.active {
   transform: translate(-50%, -50%) scale(1);
 }
 
-.editBook .buttons{
+.editBook .buttons {
   display: flex;
   justify-content: space-around;
 }
 
-.editBook .buttons button{
+.editBook .buttons button {
   width: 80px;
 }
 
-#cancel{
+#cancel {
   background-color: rgb(181, 59, 59);
 }
 
-#cancel:hover{
+#cancel:hover {
   background-color: rgba(181, 59, 59, 0.7);
 }
 
-#overlay{
+#overlay {
   position: fixed;
   opacity: 0;
   top: 0;
@@ -243,11 +243,11 @@ input:focus {
   right: 0;
   bottom: 0;
   transition: 200ms ease-in-out;
-  background-color: rgba(0,0,0,.5);
+  background-color: rgba(0, 0, 0, 0.5);
   pointer-events: none;
 }
 
-#overlay.active{
+#overlay.active {
   opacity: 1;
   pointer-events: all;
 }
@@ -260,7 +260,7 @@ input:focus {
 }
 
 /* Header main content */
-.wrapper .main .header-main{
+.wrapper .main .header-main {
   position: sticky;
   top: 0;
   background-color: var(--colorIcon);
@@ -268,27 +268,27 @@ input:focus {
   color: var(--colorFont);
 }
 
-.wrapper .main .header-main ul{
+.wrapper .main .header-main ul {
   display: flex;
   padding: 10px;
   gap: 50px;
   list-style-type: none;
 }
 
-.wrapper .main .header-main .bookScore{
+.wrapper .main .header-main .bookScore {
   display: flex;
   gap: 20px;
 }
 
 /* Main content table */
 
-.wrapper .main .wrapper-main{
+.wrapper .main .wrapper-main {
   box-sizing: border-box;
   margin-top: 30px;
   margin-bottom: 30px;
 }
 
-.wrapper .main .wrapper-main .bookTable{
+.wrapper .main .wrapper-main .bookTable {
   width: 80%;
   margin: 0 auto;
   background-color: var(--colorIcon);
@@ -296,32 +296,32 @@ input:focus {
   box-shadow: 0 0 1rem rgb(0, 0, 0, 0.5);
 }
 
-.wrapper .main .bookTable .grid-style{
+.wrapper .main .bookTable .grid-style {
   display: grid;
   grid-template-columns: 3fr 3fr 1fr 2fr 2fr 2fr 1fr;
   gap: 10px;
   list-style-type: none;
   padding: 10px;
-  border: 1px solid rgba(13, 13, 13, .3);
+  border: 1px solid rgba(13, 13, 13, 0.3);
 }
 
-.wrapper .main .bookTable .tableContent{
+.wrapper .main .bookTable .tableContent {
   background-color: var(--colorBG);
-  text-shadow: 0.05em 0.05em 0.2em rgba(0,0,0,0.6);
+  text-shadow: 0.05em 0.05em 0.2em rgba(0, 0, 0, 0.6);
 }
 
-.wrapper .main .bookTable .tableContent:nth-child(odd){
+.wrapper .main .bookTable .tableContent:nth-child(odd) {
   background-color: var(--colorBody);
   color: rgb(252, 246, 246);
 }
 
-.wrapper .main .bookTable .tableContent li{
+.wrapper .main .bookTable .tableContent li {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.wrapper .main .bookTable .tableContent .crudButton{
+.wrapper .main .bookTable .tableContent .crudButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -333,39 +333,39 @@ input:focus {
   height: 25px;
 }
 
-.wrapper .main .bookTable .tableContent .crudButton + .crudButton{
+.wrapper .main .bookTable .tableContent .crudButton + .crudButton {
   margin: 3px;
 }
 
 .wrapper .main .bookTable .tableContent .deleteBook,
-.wrapper .main .bookTable .tableContent .edit{
+.wrapper .main .bookTable .tableContent .edit {
   width: 20px;
   transition: 0.4s;
 }
 
 .wrapper .main .bookTable .tableContent .deleteBook:hover,
-.wrapper .main .bookTable .tableContent .edit:hover{
+.wrapper .main .bookTable .tableContent .edit:hover {
   transform: scale(1.1);
   filter: brightness(80%);
 }
 /* set up for read/uread a link */
-.wrapper .main .bookTable .tableContent .toggle-read{
+.wrapper .main .bookTable .tableContent .toggle-read {
   cursor: pointer;
-  transition: 0.3s}
+  transition: 0.3s;
+}
 
-.wrapper .main .bookTable .tableContent .toggle-read:hover{
+.wrapper .main .bookTable .tableContent .toggle-read:hover {
   transform: scale(1.1);
   text-decoration: underline;
 }
 
-.wrapper .main .bookTable .tableContent .readBook{
+.wrapper .main .bookTable .tableContent .readBook {
   color: rgb(24, 239, 110);
 }
 
-.wrapper .main .bookTable .tableContent .unReadBook{
+.wrapper .main .bookTable .tableContent .unReadBook {
   color: rgb(243, 29, 29);
 }
-
 
 /* footer layout */
 footer {
@@ -379,7 +379,7 @@ footer {
   color: var(--colorFont);
 }
 
-footer p{
+footer p {
   font-size: 18px;
 }
 
@@ -390,7 +390,7 @@ footer a {
   font-size: 1rem;
 }
 
-footer a:hover{
+footer a:hover {
   text-decoration: underline;
   color: rgb(255, 255, 255, 0.8);
 }
