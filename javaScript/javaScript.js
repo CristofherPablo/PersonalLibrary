@@ -16,7 +16,6 @@ function listeningDeleteBtn() {
   let deleteBookBnt = document.querySelectorAll('.deleteBook');
   deleteBookBnt.forEach(function (button) {
     button.addEventListener('click', (event) => {
-      
       myLibrary[findIndexBook(event.target)].deleteBook();
       cleanContainer();
       displayLibrary(myLibrary);
@@ -36,40 +35,6 @@ function toggleButton(button) {
     cleanContainer();
     displayLibrary(myLibrary);
   }
-}
-
-function editBook() {
-  let newTitle = document
-    .getElementById('titleEdit')
-    .value.replace(/^\s+|\s+$/gm, '');
-  let newAuthor = document
-    .getElementById('authorEdit')
-    .value.replace(/^\s+|\s+$/gm, '');
-  let newPages = parseInt(document.getElementById('pagesEdit').value);
-  let release = document.getElementById('releaseEdit').value.split('-');
-  let setDateRight =
-    `${release[2]}` + '/' + `${release[1]}` + '/' + `${release[0]}`;
-  release = setDateRight;
-  let acquired = document.getElementById('acquiredEdit').value.split('-');
-  setDateRight =
-    `${acquired[2]}` + '/' + `${acquired[1]}` + '/' + `${acquired[0]}`;
-  acquired = setDateRight;
-  let newReadStatus = document.getElementById('readEdit').checked;
-
-  let index = document.getElementById('acquiredEdit');
-  index = index.getAttribute('data-index');
-
-  myLibrary[index].title = newTitle;
-  myLibrary[index].author = newAuthor;
-  myLibrary[index].pages = newPages;
-  myLibrary[index].release = release;
-  myLibrary[index].acquired = acquired;
-  myLibrary[index].readStatus = newReadStatus;
-
-  cleanContainer();
-  displayLibrary(myLibrary);
-  cleanForm();
-  closeEditPopUp();
 }
 
 function closeEditPopUp() {
@@ -105,11 +70,7 @@ function listenCloseEditBtn() {
   });
 }
 
-function fillFormEdit(edit) {
-  // getting the index of the book to be deleted
-  let editIndex = edit.alt.split(' ');
-  editIndex = editIndex[3] * 1;
-
+function fillFormEdit(editIndex) {
   //filling form
   document.getElementById('titleEdit').value = myLibrary[editIndex].title;
   document.getElementById('authorEdit').value = myLibrary[editIndex].author;
@@ -138,13 +99,15 @@ function fillFormEdit(edit) {
     document.getElementById('readEdit').checked = false;
   }
 }
+let bookEditIndex = -1;
 
 function listenEditBtn() {
   const editButton = document.querySelectorAll('.edit');
 
   editButton.forEach(function (button) {
     button.addEventListener('click', (event) => {
-      fillFormEdit(event.target);
+      bookEditIndex = findIndexBook(event.target);
+      fillFormEdit(bookEditIndex);
       displayEditPopUp();
     });
   });
@@ -339,75 +302,64 @@ function addBookToLibrary() {
 }
 
 //validating the form
-function validationForm(
-  newTitle,
-  newAuthor,
-  newPages,
-  newRelease,
-  newAcquired
-) {
-  let title = document.getElementById(newTitle).value.replace(/\s+/g, '');
-  let author = document.getElementById(newAuthor).value.replace(/\s+/g, '');
-  let pages = parseInt(document.getElementById(newPages).value);
-  let release = document.getElementById(newRelease).value;
-  let acquired = document.getElementById(newAcquired).value;
+function validationForm(bookInformation, formType) {
   let isValid = 0;
   const currentDate = new Date();
   const currentYear = currentDate.getFullYear();
 
-  if (title === '') {
-    let p = document.querySelector(`.validationSection.${newTitle}`);
+  if (bookInformation.title === '') {
+    let p = document.querySelector(`.validationSection.${formType}`);
     p.style.display = 'block';
   } else {
-    let p = document.querySelector(`.validationSection.${newTitle}`);
+    let p = document.querySelector(`.validationSection.${formType}`);
     p.style.display = 'none';
     isValid += 1;
   }
 
-  if (author === '') {
-    let p = document.querySelector(`.validationSection.${newAuthor}`);
+  if (bookInformation.author === '') {
+    let p = document.querySelector(`.validationSection.${formType}`);
     p.style.display = 'block';
   } else {
-    let p = document.querySelector(`.validationSection.${newAuthor}`);
+    let p = document.querySelector(`.validationSection.${formType}`);
     p.style.display = 'none';
     isValid += 1;
   }
 
-  if (isNaN(pages)) {
-    let p2 = document.querySelector(`.validationSection.${newPages}.err`);
+  if (isNaN(bookInformation.pages)) {
+    let p2 = document.querySelector(`.validationSection.${formType}.err`);
     p2.style.display = 'none';
 
-    let p = document.querySelector(`.validationSection.${newPages}`);
+    let p = document.querySelector(`.validationSection.${formType}`);
     p.style.display = 'block';
   } else if (pages < 1 || pages > 9999) {
-    let p = document.querySelector(`.validationSection.${newPages}`);
+    let p = document.querySelector(`.validationSection.${formType}`);
     p.style.display = 'none';
 
-    let p2 = document.querySelector(`.validationSection.${newPages}.err`);
+    let p2 = document.querySelector(`.validationSection.${formType}.err`);
     p2.style.display = 'block';
   } else {
-    let p = document.querySelector(`.validationSection.${newPages}`);
+    let p = document.querySelector(`.validationSection.${formType}`);
     p.style.display = 'none';
 
-    let p2 = document.querySelector(`.validationSection.${newPages}.err`);
+    let p2 = document.querySelector(`.validationSection.${formType}.err`);
     p2.style.display = 'none';
     isValid += 1;
   }
 
-  if (release === '') {
-    let p = document.querySelector(`.validationSection.${newRelease}`);
-    let pErr = document.querySelector(`.validationSection.${newRelease}.err`);
+  if (bookInformation.release === '') {
+    let p = document.querySelector(`.validationSection.${formType}`);
+    let pErr = document.querySelector(`.validationSection.${formType}.err`);
     pErr.style.display = 'none';
     p.style.display = 'block';
   } else {
-    let checkDate = release.split('-');
-    let p = document.querySelector(`.validationSection.${newRelease}`);
-    let pErr = document.querySelector(`.validationSection.${newRelease}.err`);
+    let checkDate = bookInformation.release.split('/');
+    let p = document.querySelector(`.validationSection.${formType}`);
+    let pErr = document.querySelector(`.validationSection.${formType}.err`);
 
-    if (checkDate[0].length > 4) {
+    if (checkDate[2].length > 4) {
       p.style.display = 'none';
       pErr.style.display = 'block';
-    } else if (checkDate[0] > currentYear) {
+    } else if (checkDate[2] > currentYear) {
       p.style.display = 'none';
       pErr.style.display = 'block';
     } else {
@@ -417,20 +369,20 @@ function validationForm(
     }
   }
 
-  if (acquired === '') {
-    let p = document.querySelector(`.validationSection.${newAcquired}`);
-    let pErr = document.querySelector(`.validationSection.${newAcquired}.err`);
+  if (bookInformation.acquired === '') {
+    let p = document.querySelector(`.validationSection.${formType}`);
+    let pErr = document.querySelector(`.validationSection.${formType}.err`);
     pErr.style.display = 'none';
     p.style.display = 'block';
   } else {
-    let checkDate = acquired.split('-');
-    let p = document.querySelector(`.validationSection.${newAcquired}`);
-    let pErr = document.querySelector(`.validationSection.${newAcquired}.err`);
+    let checkDate = bookInformation.acquired.split('/');
+    let p = document.querySelector(`.validationSection.${formType}`);
+    let pErr = document.querySelector(`.validationSection.${formType}.err`);
 
-    if (checkDate[0].length > 4) {
+    if (checkDate[2].length > 4) {
       p.style.display = 'none';
       pErr.style.display = 'block';
-    } else if (checkDate[0] > currentYear) {
+    } else if (checkDate[2] > currentYear) {
       p.style.display = 'none';
       pErr.style.display = 'block';
     } else {
@@ -443,19 +395,59 @@ function validationForm(
   return isValid;
 }
 
+function retrieveFormInformation(
+  getTitle,
+  getAuthor,
+  getPages,
+  getRelease,
+  getAcquired,
+  getReadStatus
+) {
+  let title = document.getElementById(getTitle).value.replace(/\s+/g, '');
+  let author = document.getElementById(getAuthor).value.replace(/\s+/g, '');
+  let pages = parseInt(document.getElementById(getPages).value);
+  let release = document.getElementById(getRelease).value.split('-');
+  let acquired = document.getElementById(getAcquired).value.split('-');
+  let readStatus = document.getElementById(getReadStatus).checked;
+
+  //setting dates to the format of DD/MM/YYYY
+  let setDateRight =
+    `${release[2]}` + '/' + `${release[1]}` + '/' + `${release[0]}`;
+  release = setDateRight;
+  setDateRight =
+    `${acquired[2]}` + '/' + `${acquired[1]}` + '/' + `${acquired[0]}`;
+  acquired = setDateRight;
+  // Return object with all the form data
+  return {
+    title: title,
+    author: author,
+    pages: pages,
+    release: release,
+    acquired: acquired,
+    readStatus: readStatus,
+  };
+}
+
 let sendEditForm = document.getElementById('edit');
 sendEditForm.addEventListener('click', (event) => {
   event.preventDefault();
 
+  let bookInformation = retrieveFormInformation(
+    'titleEdit',
+    'authorEdit',
+    'pagesEdit',
+    'releaseEdit',
+    'acquiredEdit',
+    'readEdit'
+  );
+
+  console.log(bookInformation);
+
   if (
-    validationForm(
-      'titleEdit',
-      'authorEdit',
-      'pagesEdit',
-      'releaseEdit',
-      'acquiredEdit'
-    ) === 5
+    validationForm(bookInformation, 'editForm') === 5 &&
+    bookEditIndex != -1
   ) {
+    console.log('entrou');
     editBook();
   }
 });
