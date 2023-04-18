@@ -1,27 +1,11 @@
 import { myLibrary } from './bookData.js';
 import { Book } from './bookCRUD.js';
-import { validationForm } from './validationForm.js';
-
-function cleanForm() {
-  let form = document.querySelector('form');
-  form.reset();
-}
+import { validationForm, retrieveFormInformation, cleanForm, fillFormEdit } from './form.js';
 
 function findIndexBook(targetBook) {
   let index = targetBook.alt.split(' ');
   index = index[3] * 1;
   return index;
-}
-
-function listeningDeleteBtn() {
-  let deleteBookBnt = document.querySelectorAll('.deleteBook');
-  deleteBookBnt.forEach(function (button) {
-    button.addEventListener('click', (event) => {
-      myLibrary[findIndexBook(event.target)].deleteBook();
-      cleanContainer();
-      displayLibrary(myLibrary);
-    });
-  });
 }
 
 function toggleButton(button) {
@@ -60,70 +44,6 @@ function displayEditPopUp() {
   overlay.classList.add('active');
 }
 
-function listenCloseEditBtn() {
-  const cancelUpdate = document.querySelectorAll('#cancel');
-
-  cancelUpdate.forEach(function (button) {
-    button.addEventListener('click', () => {
-      cleanForm();
-      closeEditPopUp();
-    });
-  });
-}
-
-function fillFormEdit(editIndex) {
-  //filling form
-  document.getElementById('titleEdit').value = myLibrary[editIndex].title;
-  document.getElementById('authorEdit').value = myLibrary[editIndex].author;
-  document.getElementById('pagesEdit').value = myLibrary[editIndex].pages;
-
-  //setting data to be like the default setting
-  let dateString = myLibrary[editIndex].release;
-  let [day, month, year] = dateString.split('/');
-  let dateObj = new Date(year, month - 1, day);
-  let formattedDate = dateObj.toISOString().split('T')[0];
-
-  document.getElementById('releaseEdit').value = formattedDate;
-
-  dateString = myLibrary[editIndex].acquired;
-  [day, month, year] = dateString.split('/');
-  dateObj = new Date(year, month - 1, day);
-  formattedDate = dateObj.toISOString().split('T')[0];
-
-  let settingIndex = document.getElementById('acquiredEdit');
-  settingIndex.value = formattedDate;
-  settingIndex.setAttribute('data-index', editIndex);
-
-  if (myLibrary[editIndex].readStatus) {
-    document.getElementById('readEdit').checked = true;
-  } else {
-    document.getElementById('readEdit').checked = false;
-  }
-}
-let bookEditIndex = -1;
-
-function listenEditBtn() {
-  const editButton = document.querySelectorAll('.edit');
-
-  editButton.forEach(function (button) {
-    button.addEventListener('click', (event) => {
-      bookEditIndex = findIndexBook(event.target);
-      fillFormEdit(bookEditIndex);
-      displayEditPopUp();
-    });
-  });
-}
-
-function listeningReadUnreadBtn() {
-  let readUnreadBtn = document.querySelectorAll('.toggle-read');
-
-  readUnreadBtn.forEach(function (button) {
-    button.addEventListener('click', (event) => {
-      toggleButton(event.target);
-    });
-  });
-}
-
 function updateMainHeader() {
   let total = document.getElementById('totalBooks');
   let read = document.getElementById('booksRead');
@@ -153,7 +73,7 @@ function updateMainHeader() {
   unread.innerText = countUnRead;
 }
 
-function displayLibrary(myLibrary) {
+function displayLibrary() {
   if (myLibrary.length === 0) {
     updateMainHeader();
     return;
@@ -256,55 +176,44 @@ function alreadyAdd(titleNewBook) {
   return false;
 }
 
-function retrieveFormInformation(
-  getTitle,
-  getAuthor,
-  getPages,
-  getRelease,
-  getAcquired,
-  getReadStatus
-) {
-  let title = document
-    .getElementById(getTitle)
-    .value.replace(/^\s+|\s+$/gm, '');
-  let author = document
-    .getElementById(getAuthor)
-    .value.replace(/^\s+|\s+$/gm, '');
-  let pages = parseInt(document.getElementById(getPages).value);
-  let release = document.getElementById(getRelease).value.split('-');
-  let acquired = document.getElementById(getAcquired).value.split('-');
-  let readStatus = document.getElementById(getReadStatus).checked;
+// Listening the button to close the form Edit without editing the book.
 
-  //Checking if the date is invalid
-  let setDateRight;
-  if (release[0] === '' || release[1] === '' || release[2] === '') {
-    release = '';
-  } else {
-    //setting dates to the format of DD/MM/YYYY
-    setDateRight =
-      `${release[2]}` + '/' + `${release[1]}` + '/' + `${release[0]}`;
-    release = setDateRight;
-  }
+function listenCloseEditBtn() {
+  const cancelUpdate = document.querySelectorAll('#cancel');
 
-  if (acquired[0] === '' || acquired[1] === '' || acquired[2] === '') {
-    acquired = '';
-  } else {
-    setDateRight =
-      `${acquired[2]}` + '/' + `${acquired[1]}` + '/' + `${acquired[0]}`;
-    acquired = setDateRight;
-  }
-
-  // Return object with all the form data
-  return {
-    title: title,
-    author: author,
-    pages: pages,
-    release: release,
-    acquired: acquired,
-    readStatus: readStatus,
-  };
+  cancelUpdate.forEach(function (button) {
+    button.addEventListener('click', () => {
+      cleanForm();
+      closeEditPopUp();
+    });
+  });
 }
 
+// Listening button to change Read and Unread status
+
+function listeningReadUnreadBtn() {
+  let readUnreadBtn = document.querySelectorAll('.toggle-read');
+
+  readUnreadBtn.forEach(function (button) {
+    button.addEventListener('click', (event) => {
+      toggleButton(event.target);
+    });
+  });
+}
+
+// listening all delete buttons and call the delete book function
+function listeningDeleteBtn() {
+  let deleteBookBnt = document.querySelectorAll('.deleteBook');
+  deleteBookBnt.forEach(function (button) {
+    button.addEventListener('click', (event) => {
+      myLibrary[findIndexBook(event.target)].deleteBook();
+      cleanContainer();
+      displayLibrary(myLibrary);
+    });
+  });
+}
+
+//Adding an event listener to update the book and display it
 let sendEditForm = document.getElementById('edit');
 sendEditForm.addEventListener('click', (event) => {
   event.preventDefault();
@@ -327,7 +236,23 @@ sendEditForm.addEventListener('click', (event) => {
   }
 });
 
-//Adding an event listener and adding a book to the array.
+// button to open the edit pop up with the book information displayed in it for editing
+
+let bookEditIndex = -1;
+
+function listenEditBtn() {
+  const editButton = document.querySelectorAll('.edit');
+
+  editButton.forEach(function (button) {
+    button.addEventListener('click', (event) => {
+      bookEditIndex = findIndexBook(event.target);
+      fillFormEdit(bookEditIndex);
+      displayEditPopUp();
+    });
+  });
+}
+
+//Adding an event listener to add a book in the array.
 let addBookBnt = document.getElementById('addBook');
 
 addBookBnt.addEventListener('click', (event) => {
@@ -344,13 +269,13 @@ addBookBnt.addEventListener('click', (event) => {
   //verifying if the book is already registered.
   if (alreadyAdd(bookInformation.title)) {
     return;
-    //validating the form 
+    //validating the form
   } else if (validationForm(bookInformation, 'add') === 5) {
-    myLibrary[myLibrary.length] = Book.addBookToLibrary(bookInformation);
+    myLibrary[myLibrary.length] = Book.addBook(bookInformation);
     cleanContainer();
     displayLibrary(myLibrary);
   }
 });
 
-displayLibrary(myLibrary);
+displayLibrary();
 listenCloseEditBtn();

@@ -31,7 +31,7 @@ class Book {
     this.readStatus = bookToEdit.readStatus;
   };
 
-  static addBookToLibrary = (bookInformation) => {
+  static addBook = (bookInformation) => {
 
     let index = myLibrary.length;
 
