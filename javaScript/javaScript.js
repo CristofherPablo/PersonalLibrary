@@ -1,43 +1,25 @@
-import {myLibrary} from './bookData.js'
-
-class Book {
-  constructor(title, author, pages, release, acquired, readStatus, index) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.release = release;
-    this.acquired = acquired;
-    this.readStatus = readStatus;
-    this.index = index;
-  }
-}
-
-function deleteBook(img) {
-  // getting the index of the book to be deleted
-  let deleteIndex = img.alt.split(' ');
-  deleteIndex = deleteIndex[3] * 1;
-
-  myLibrary.forEach((book) => {
-    if (book.index > deleteIndex) {
-      book.index = book.index - 1;
-    }
-  });
-
-  myLibrary.splice(deleteIndex, 1);
-  cleanContainer();
-  displayLibrary(myLibrary);
-}
+import { getMyLibrary, myLibrary } from './bookData.js';
+import { Book } from './bookCRUD.js';
 
 function cleanForm() {
   let form = document.querySelector('form');
   form.reset();
 }
 
+function findIndexBook(targetBook) {
+  let index = targetBook.alt.split(' ');
+  index = index[3] * 1;
+  return index;
+}
+
 function listeningDeleteBtn() {
   let deleteBookBnt = document.querySelectorAll('.deleteBook');
   deleteBookBnt.forEach(function (button) {
     button.addEventListener('click', (event) => {
-      deleteBook(event.target);
+      
+      myLibrary[findIndexBook(event.target)].deleteBook();
+      cleanContainer();
+      displayLibrary(myLibrary);
     });
   });
 }
@@ -84,7 +66,6 @@ function editBook() {
   myLibrary[index].acquired = acquired;
   myLibrary[index].readStatus = newReadStatus;
 
-  
   cleanContainer();
   displayLibrary(myLibrary);
   cleanForm();
@@ -464,7 +445,7 @@ function validationForm(
 
 let sendEditForm = document.getElementById('edit');
 sendEditForm.addEventListener('click', (event) => {
- event.preventDefault();
+  event.preventDefault();
 
   if (
     validationForm(

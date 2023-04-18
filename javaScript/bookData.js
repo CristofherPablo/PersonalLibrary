@@ -1,4 +1,7 @@
-let myLibrary = [
+import {Book} from './bookCRUD.js';
+
+let myLibrary = [];
+let localDataBase = [
     {
       title: 'The Lord of the Rings - The Fellowship of the Ring',
       author: 'J.R.R. Tolkien',
@@ -100,5 +103,43 @@ let myLibrary = [
     },
   ];
 
+  function alreadyAdd(titleNewBook) {
+    let newBook = titleNewBook.replace(/\s+/g, '').toLowerCase();
+  
+    for (let i = 0; i < myLibrary.length; i++) {
+      let currentBook = myLibrary[i].title;
+      currentBook = currentBook.replace(/\s+/g, '').toLowerCase();
+      if (newBook === currentBook) {
+        return true;
+      }
+    }
+    return false;
+  }
 
-  export {myLibrary};
+  localDataBase.forEach((book) => {
+    let newBook = new Book(
+      book.title,
+      book.author,
+      book.pages,
+      book.release,
+      book.acquired,
+      book.readStatus,
+      book.index
+    );
+  
+    if (myLibrary.length === 0) {
+      myLibrary.push(newBook);  
+    } else {
+      if (alreadyAdd(newBook.title)) {
+        return;
+      } else {
+        myLibrary.push(newBook);
+      }
+    }
+  });
+
+  function getMyLibrary () {
+    return myLibrary
+  }
+
+  export {getMyLibrary, myLibrary};
