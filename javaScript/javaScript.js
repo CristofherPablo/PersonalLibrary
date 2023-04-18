@@ -1,6 +1,6 @@
 import { myLibrary } from './bookData.js';
 import { Book } from './bookCRUD.js';
-import {validationForm} from './validationForm.js'
+import { validationForm } from './validationForm.js';
 
 function cleanForm() {
   let form = document.querySelector('form');
@@ -256,52 +256,6 @@ function alreadyAdd(titleNewBook) {
   return false;
 }
 
-function addBookToLibrary() {
-  let title = document.getElementById('title').value.replace(/^\s+|\s+$/gm, '');
-  let author = document
-    .getElementById('author')
-    .value.replace(/^\s+|\s+$/gm, '');
-  let pages = parseInt(document.getElementById('pages').value);
-  let release = document.getElementById('release').value.split('-');
-  let setDateRight =
-    `${release[2]}` + '/' + `${release[1]}` + '/' + `${release[0]}`;
-  release = setDateRight;
-  let acquired = document.getElementById('acquired').value.split('-');
-  setDateRight =
-    `${acquired[2]}` + '/' + `${acquired[1]}` + '/' + `${acquired[0]}`;
-  acquired = setDateRight;
-  let readStatus = document.getElementById('read').checked;
-  let index = myLibrary.length;
-
-  let newBook = new Book(
-    title,
-    author,
-    pages,
-    release,
-    acquired,
-    readStatus,
-    index
-  );
-
-  cleanForm();
-
-  if (myLibrary.length === 0) {
-    myLibrary.push(newBook);
-    cleanContainer();
-    displayLibrary(myLibrary);
-
-    console.log(newBook);
-  } else {
-    if (alreadyAdd(newBook.title)) {
-      return;
-    } else {
-      myLibrary.push(newBook);
-      cleanContainer();
-      displayLibrary(myLibrary);
-    }
-  }
-}
-
 function retrieveFormInformation(
   getTitle,
   getAuthor,
@@ -373,13 +327,28 @@ sendEditForm.addEventListener('click', (event) => {
   }
 });
 
+//Adding an event listener and adding a book to the array.
 let addBookBnt = document.getElementById('addBook');
 
 addBookBnt.addEventListener('click', (event) => {
   event.preventDefault();
 
-  if (validationForm('title', 'author', 'pages', 'release', 'acquired') === 5) {
-    addBookToLibrary();
+  let bookInformation = retrieveFormInformation(
+    'title',
+    'author',
+    'pages',
+    'release',
+    'acquired',
+    'read'
+  );
+  //verifying if the book is already registered.
+  if (alreadyAdd(bookInformation.title)) {
+    return;
+    //validating the form 
+  } else if (validationForm(bookInformation, 'add') === 5) {
+    myLibrary[myLibrary.length] = Book.addBookToLibrary(bookInformation);
+    cleanContainer();
+    displayLibrary(myLibrary);
   }
 });
 

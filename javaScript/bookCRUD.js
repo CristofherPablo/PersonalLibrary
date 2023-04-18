@@ -1,4 +1,4 @@
-import { getMyLibrary, myLibrary } from './bookData.js';
+import { myLibrary } from './bookData.js';
 class Book {
   constructor(title, author, pages, release, acquired, readStatus, index) {
     this.title = title;
@@ -23,15 +23,28 @@ class Book {
   };
 
   editBook = (bookToEdit) => {
-  
     this.title = bookToEdit.title;
     this.author = bookToEdit.author;
     this.pages = bookToEdit.pages;
     this.release = bookToEdit.release;
     this.acquired = bookToEdit.acquired;
     this.readStatus = bookToEdit.readStatus;
-  
-  }
+  };
+
+  static addBookToLibrary = (bookInformation) => {
+
+    let index = myLibrary.length;
+
+    return new Book(
+      bookInformation.title,
+      bookInformation.author,
+      bookInformation.pages,
+      bookInformation.release,
+      bookInformation.acquired,
+      bookInformation.readStatus,
+      index
+    );
+  };
 }
 
 export { Book };
